@@ -2,7 +2,7 @@
 
 把邮件、账单和费用表，整理成有原文依据的账单建议。
 
-泊知面向航运和国际货代费用整理，使用 **Python、LangChain、智谱 GLM 和确定性校验规则**。它可以提取费用、对照旧账、判断收付方向，将不明确的内容留给人确认，并导出标准 JSON 或 CSV。系统生成操作建议，不直接入账。
+泊知面向航运和国际货代费用整理，使用 **Python、LangChain、智谱 GLM **。它可以提取费用、对照旧账、判断收付方向，将不明确的内容留给人确认，并导出标准 JSON 或 CSV。
 
 **本地网页 · 多格式解析 · 逐字段证据 · 增量更新 · 157 项自动化测试**
 
@@ -20,13 +20,13 @@
 
 ## 界面是什么样
 
-上传区采用引导式工作台。常用操作直接展示，识别服务由后台统一配置，页面不要求使用者选择识别方式。
+上传区直接展示常用操作，识别服务由后台统一配置。
 
 ![泊知的实际工作台界面](docs/assets/01-workspace.jpg)
 
 ## 输入什么，输出什么
 
-仓库自带三份可公开分发的合成邮件、一份合成旧账和一套真实模型运行快照。公司、邮箱、单据编号和费用均为演示数据，不是客户账单。
+仓库自带三份可公开分发的合成邮件、一份合成旧账和一套真实模型运行快照。
 
 ![合成演示的输入与预期输出对照](docs/assets/input-output.svg)
 
@@ -45,26 +45,25 @@
 
 ### 第二步，开始整理，查看真实处理阶段
 
-页面展示后台实际执行到的阶段和正在处理的文件，不使用模拟百分比。复杂材料或服务限流时可能等待更久。刷新页面会尝试找回同一任务，不会自动重复发起模型调用。
+页面展示后台实际执行到的阶段和正在处理的文件。刷新页面会尝试找回同一任务。
 
 ![真实模型调用期间的处理状态](docs/assets/03-processing.jpg)
 
 ### 第三步，一起核对结果
 
-下图来自本仓库合成材料的实际运行。完整结果保存在 [result.json](examples/walkthrough/result.json)，运行信息、原文和证据保存在 [report.json](examples/walkthrough/report.json)。模型输出有波动，复现时请以本次报告为准，不以截图代替核查。
+下图来自本仓库的实际运行。完整结果保存在 [result.json](examples/walkthrough/result.json)，运行信息、原文和证据保存在 [report.json](examples/walkthrough/report.json)。
 
 ![真实运行得到的新增、更新和待确认记录](docs/assets/04-results.jpg)
 
 ### 第四步，查看字段变更与原文依据
 
-点击“查看依据”，可以核查当前主体、原始费用、修改了哪些字段，以及引文来自哪里。没有充分证据的字段不会被悄悄补全。
+点击“查看依据”，可以核查当前主体、原始费用、修改了哪些字段，以及引文来自哪里。
 
 ![费用详情中的旧值、新值和原文依据](docs/assets/05-evidence.jpg)
 
 ### 第五步，导出你需要的格式
 
-JSON 适合交给财务系统或继续处理，CSV 适合人工核对。导出由后台直接生成，金额使用 Decimal，避免浏览器转换金额时丢失精度。下面图片从本次实际 JSON 输出中选取字段，不是界面设计稿。
-
+JSON 适合交给财务系统或继续处理，CSV 适合人工核对。导出由后台直接生成，金额使用 Decimal，避免浏览器转换金额时丢失精度。
 ![本次实际 JSON 输出的字段节选](docs/assets/06-output-json.svg)
 
 完整输出保留 `document_info`、`transaction_party`、`charge_details`、`financial_attributes` 和 `audit_trail`。`audit_trail` 包含来源、证据、待确认原因，以及更新时的 `changed_fields`、`previous_values`。
@@ -121,18 +120,6 @@ shipping-bill-agent/
 
 `.env`、真实业务材料、`data/private`、运行输出、虚拟环境和生成的 ZIP 不进入 Git。网页访问凭据只保存在当前页面内存中。仓库里的演示图片和输出只使用合成业务数据。
 
-## 验证与交付
-
-```powershell
-uv sync --frozen --extra dev
-uv run pytest -q
-uv run ruff check src tests scripts
-node --check src/shipping_agent/web.js
-uv run python scripts/check_docs.py
-uv run python scripts/package.py
-```
-
-交付包生成在 `dist/shipping-bill-agent.zip`。CI 执行离线测试、代码检查、前端语法检查和 README 本地图片/链接检查，不会在 GitHub Actions 中偷偷调用付费服务。
 
 | 文档 | 内容 |
 |---|---|
@@ -144,4 +131,3 @@ uv run python scripts/package.py
 | [开发说明](CONTRIBUTING.md) | 本地开发和修改检查 |
 | [数据与凭据](SECURITY.md) | 密钥、运行数据与问题报告方式 |
 
-当前是可运行的本地单进程工作台。任务状态不跨服务重启续跑，已完成报告可从历史记录恢复；DOC 使用 LibreOffice 或 Windows Word；容器检查见 GitHub Actions。生产多租户、并发账本写入、审批和财务系统连接需要另行接入。
