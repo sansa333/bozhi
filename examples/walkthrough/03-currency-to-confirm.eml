@@ -1,0 +1,21 @@
+Subject: DEMO-REVIEW-001 | Currency requires confirmation
+From: billing@example.invalid
+To: finance@example.invalid
+Date: Fri, 30 Oct 2026 09:00:00 +0800
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+SYNTHETIC EXAMPLE - NOT A REAL BILL
+Invoice DEMO-REVIEW-001
+Document date: 2026-10-30
+Issuer: Demo Ocean Logistics
+Recipient: Demo Trading Ltd
+Payer: Demo Trading Ltd
+Payee: Demo Ocean Logistics
+Demo Trading Ltd pays Demo Ocean Logistics for this actual charge.
+
+Description | Amount
+Handling Fee | $50.00
+The dollar currency has NOT been specified. Please ask finance to confirm it.
+Do not assume this is USD or any other specific dollar currency.

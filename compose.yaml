@@ -1,0 +1,9 @@
+services:
+  shipping-agent:
+    build: .
+    ports: ["127.0.0.1:8010:8010"]
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data/private
+    volumes:
+      - ./data/private:/app/data/private

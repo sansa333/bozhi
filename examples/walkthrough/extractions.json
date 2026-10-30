@@ -1,0 +1,302 @@
+{
+  "5bd1a302a8fb6b66cbf296fd8820bcf66f0151f545190a59a1a050036d86812f": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-INV-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "DEMO-INV-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "2026-10-30"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Demo Ocean Logistics"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Demo Ocean Logistics"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 100.00"
+      }
+    ],
+    "totals": {
+      "USD": 100.0
+    },
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "Handling Fee",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 65.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": null,
+          "unit_price": null,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "65.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      },
+      {
+        "source_line": "Doc Fee",
+        "charge_details": {
+          "original_charge_item": "Doc Fee",
+          "charge_item": null,
+          "amount": 35.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": null,
+          "unit_price": null,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Doc Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "35.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  },
+  "f492056c76563fd9c89fbc9c702df5a0b88837739489c2836ca7e747861ba1be": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-UPDATE-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice DEMO-UPDATE-001"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Invoice DEMO-UPDATE-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document date: 2026-10-30"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 40.00\r"
+      }
+    ],
+    "totals": {
+      "USD": 40.0
+    },
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "Handling Fee | 40.00 | USD | PP",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 40.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": null,
+          "unit_price": null,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee | 40.00 | USD | PP"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "40.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          }
+        ],
+        "explicit_changes": [
+          "charge_details.amount"
+        ],
+        "change_quote": "Please update the amount of Handling Fee on invoice DEMO-UPDATE-001 to USD 40.00.",
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  },
+  "7249e18d98925a60c1d0388114d9f94e05d035adc99adc5bb98ea9c41f50b416": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-REVIEW-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice DEMO-REVIEW-001"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Invoice DEMO-REVIEW-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document date: 2026-10-30"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics"
+      }
+    ],
+    "totals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "Handling Fee | $50.00",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 50.00,
+          "currency": null,
+          "payment_term": null,
+          "quantity": null,
+          "unit_price": null,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "$50.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 0.8
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": [
+      "Currency not specified for amount $50.00 - requires confirmation"
+    ]
+  }
+}

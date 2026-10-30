@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shipping-bill-agent"
+version = "0.1.0"
+description = "Evidence-grounded shipping bill assistant built with Python and LangChain"
+readme = "README.md"
+authors = [{name = "sansa333"}]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "langchain==1.4.0", "langchain-openai==1.6.2", "socksio>=1.0,<2",
+  "pydantic>=2.12,<3", "pydantic-settings>=2.12,<3",
+  "requests>=2.32,<3", "pycountry>=24.6", "simplejson>=3.20",
+  "pdfplumber>=0.11,<0.12", "pypdf>=6,<7", "Pillow>=11,<13",
+  "openpyxl>=3.1,<4", "xlrd>=2.0,<3", "python-docx>=1.2,<2",
+  "beautifulsoup4>=4.13,<5", "fastapi>=0.120,<1", "uvicorn>=0.38,<1",
+  "python-multipart>=0.0.20", "rapidocr-onnxruntime==1.4.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.28,<1", "ruff>=0.14,<1", "xlwt>=1.3"]
+
+[project.scripts]
+shipping-agent = "shipping_agent.cli:main"
+
+[project.urls]
+Repository = "https://github.com/sansa333/bozhi"
+Issues = "https://github.com/sansa333/bozhi/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/shipping_agent"]

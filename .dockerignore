@@ -1,0 +1,8 @@
+.env
+.venv
+.git
+data
+output
+inspection
+dist
+__pycache__

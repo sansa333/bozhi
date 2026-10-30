@@ -1,0 +1,45 @@
+[
+  {
+    "bill_id": "demo-existing-handling-001",
+    "operation": "CREATE",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-UPDATE-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "charge_details": {
+      "original_charge_item": "Handling Fee",
+      "charge_item": "Handling Charge",
+      "amount": 30.00,
+      "currency": "USD",
+      "payment_term": "PP",
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP"
+    },
+    "audit_trail": {
+      "ai_reasoning": [],
+      "sources": [],
+      "evidence": [],
+      "issues": [],
+      "confidence": 0,
+      "matched_bill_id": null,
+      "changed_fields": [],
+      "previous_values": {},
+      "proposed_operation": null
+    }
+  }
+]

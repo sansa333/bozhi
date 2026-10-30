@@ -1,0 +1,14 @@
+{
+  "synthetic_data": true,
+  "run_id": "c82b2491946b421dab26e2bfdf0b6aa6",
+  "extraction_mode": "live",
+  "model": "glm-4.5-flash",
+  "prompt_version": "shipping-extraction-v3",
+  "seconds": 128.172,
+  "operations": {
+    "CREATE": 2,
+    "UPDATE": 1,
+    "PENDING_REVIEW": 1
+  },
+  "posting_performed": false
+}

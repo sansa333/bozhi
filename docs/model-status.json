@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-30T13:50:27+08:00",
+  "model": "glm-4.5-flash",
+  "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+  "key_configured": true,
+  "live_requested": true,
+  "paid_balance_verified": false,
+  "balance_note": "此检查不查询账户余额、付费套餐或剩余额度。",
+  "ok": true,
+  "status": "call_succeeded",
+  "message": "当前配置的模型调用成功。",
+  "response": "CONNECTION_OK",
+  "reported_model": "glm-4.5-flash",
+  "usage": {
+    "input_tokens": 15,
+    "output_tokens": 4,
+    "total_tokens": 19,
+    "input_token_details": {
+      "cache_read": 4
+    },
+    "output_token_details": {}
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "ok": true,
+      "seconds": 0.875
+    }
+  ],
+  "official_model_notice": "https://www.zhipuai.cn/zh/news/148",
+  "glm47_direct_probe": {
+    "stable_call_verified": false,
+    "observed_outcomes": [
+      "HTTP 429",
+      "request timeout"
+    ],
+    "paid_balance_failure_confirmed": false
+  }
+}

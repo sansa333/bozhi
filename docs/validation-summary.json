@@ -1,0 +1,23 @@
+{
+  "verified_on": "2026-10-30",
+  "python": "3.12.13",
+  "unit_and_integration_tests_passed": 103,
+  "ruff": "passed",
+  "live_run_id": "1912ec376f494a08b74b53239ec1a412",
+  "model": "glm-4.5-flash",
+  "source_count": 6,
+  "monetary_records": 7,
+  "no_charge_review_records": 2,
+  "all_records_pending_review": true,
+  "amount_reference_matched": 7,
+  "amount_reference_total": 7,
+  "live_source_processing_failures": 0,
+  "current_code_replay_equals_live_business_fields": true,
+  "local_web_health_http_status": 200,
+  "exam_ocr_public_dummy_pdf_http_status": 200,
+  "private_materials_exam_ocr_verified": false,
+  "accounting_entity_confirmed": false,
+  "docker_runtime_verified": false,
+  "real_doc_converter_verified": false,
+  "final_code_replay_run_id": "6c04dca45ed140a1969065bbc457b7c3"
+}

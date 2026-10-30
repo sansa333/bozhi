@@ -1,0 +1,5 @@
+﻿处理建议,单据编号,费用名称,金额,币种,当前记账主体,应收应付,待确认原因
+CREATE,DEMO-INV-001,Handling Charge,65.0,USD,Demo Trading Ltd,AP,
+CREATE,DEMO-INV-001,Documentation Fee,35.0,USD,Demo Trading Ltd,AP,
+UPDATE,DEMO-UPDATE-001,Handling Charge,40.0,USD,Demo Trading Ltd,AP,
+PENDING_REVIEW,DEMO-REVIEW-001,Handling Charge,50.00,,Demo Trading Ltd,AP,Currency not specified for amount $50.00 - requires confirmation | INVALID_OR_MISSING_CURRENCY | LOW_CONFIDENCE

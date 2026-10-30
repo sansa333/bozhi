@@ -1,0 +1,501 @@
+[
+  {
+    "bill_id": "bill-1ac278587cb82446a40a6254",
+    "operation": "CREATE",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-INV-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "charge_details": {
+      "original_charge_item": "Handling Fee",
+      "charge_item": "Handling Charge",
+      "amount": 65.0,
+      "currency": "USD",
+      "payment_term": "PP",
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP"
+    },
+    "audit_trail": {
+      "ai_reasoning": [
+        "从 01-new-invoice.eml 的 Handling Fee 提取费用",
+        "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+      ],
+      "sources": [
+        "src-0001-5bd1a302a8fb"
+      ],
+      "evidence": [
+        {
+          "path": "document_info.document_type",
+          "quote": "Invoice",
+          "start": 179,
+          "end": 186,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "document_info.reference_no",
+          "quote": "DEMO-INV-001",
+          "start": 9,
+          "end": 21,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "document_info.document_date",
+          "quote": "2026-10-30",
+          "start": 216,
+          "end": 226,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.issuer",
+          "quote": "Demo Ocean Logistics",
+          "start": 236,
+          "end": 256,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.recipient",
+          "quote": "Demo Trading Ltd",
+          "start": 269,
+          "end": 285,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.payer",
+          "quote": "Demo Trading Ltd",
+          "start": 269,
+          "end": 285,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.payee",
+          "quote": "Demo Ocean Logistics",
+          "start": 236,
+          "end": 256,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.original_charge_item",
+          "quote": "Handling Fee",
+          "start": 469,
+          "end": 481,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.amount",
+          "quote": "65.00",
+          "start": 484,
+          "end": 489,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.currency",
+          "quote": "USD",
+          "start": 492,
+          "end": 495,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.payment_term",
+          "quote": "PP",
+          "start": 498,
+          "end": 500,
+          "source_id": "src-0001-5bd1a302a8fb"
+        }
+      ],
+      "issues": [],
+      "confidence": 1.0,
+      "matched_bill_id": null,
+      "changed_fields": [],
+      "previous_values": {},
+      "proposed_operation": "CREATE"
+    }
+  },
+  {
+    "bill_id": "bill-befed77b980a33c661b59685",
+    "operation": "CREATE",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-INV-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "charge_details": {
+      "original_charge_item": "Doc Fee",
+      "charge_item": "Documentation Fee",
+      "amount": 35.0,
+      "currency": "USD",
+      "payment_term": "PP",
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP"
+    },
+    "audit_trail": {
+      "ai_reasoning": [
+        "从 01-new-invoice.eml 的 Doc Fee 提取费用",
+        "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+      ],
+      "sources": [
+        "src-0001-5bd1a302a8fb"
+      ],
+      "evidence": [
+        {
+          "path": "document_info.document_type",
+          "quote": "Invoice",
+          "start": 179,
+          "end": 186,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "document_info.reference_no",
+          "quote": "DEMO-INV-001",
+          "start": 9,
+          "end": 21,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "document_info.document_date",
+          "quote": "2026-10-30",
+          "start": 216,
+          "end": 226,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.issuer",
+          "quote": "Demo Ocean Logistics",
+          "start": 236,
+          "end": 256,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.recipient",
+          "quote": "Demo Trading Ltd",
+          "start": 269,
+          "end": 285,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.payer",
+          "quote": "Demo Trading Ltd",
+          "start": 269,
+          "end": 285,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "transaction_party.payee",
+          "quote": "Demo Ocean Logistics",
+          "start": 236,
+          "end": 256,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.original_charge_item",
+          "quote": "Doc Fee",
+          "start": 502,
+          "end": 509,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.amount",
+          "quote": "35.00",
+          "start": 512,
+          "end": 517,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.currency",
+          "quote": "USD",
+          "start": 492,
+          "end": 495,
+          "source_id": "src-0001-5bd1a302a8fb"
+        },
+        {
+          "path": "charge_details.payment_term",
+          "quote": "PP",
+          "start": 498,
+          "end": 500,
+          "source_id": "src-0001-5bd1a302a8fb"
+        }
+      ],
+      "issues": [],
+      "confidence": 1.0,
+      "matched_bill_id": null,
+      "changed_fields": [],
+      "previous_values": {},
+      "proposed_operation": "CREATE"
+    }
+  },
+  {
+    "bill_id": "demo-existing-handling-001",
+    "operation": "UPDATE",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-UPDATE-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "charge_details": {
+      "original_charge_item": "Handling Fee",
+      "charge_item": "Handling Charge",
+      "amount": 40.0,
+      "currency": "USD",
+      "payment_term": "PP",
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP"
+    },
+    "audit_trail": {
+      "ai_reasoning": [
+        "从 02-update-instruction.eml 的 Handling Fee | 40.00 | USD | PP 提取费用",
+        "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算",
+        "按规则 MATCH_TIER_1 匹配已有账单；未获授权字段保留原值"
+      ],
+      "sources": [
+        "src-0002-f492056c7656"
+      ],
+      "evidence": [
+        {
+          "path": "document_info.document_type",
+          "quote": "Invoice DEMO-UPDATE-001",
+          "start": 184,
+          "end": 207,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "document_info.reference_no",
+          "quote": "Invoice DEMO-UPDATE-001",
+          "start": 184,
+          "end": 207,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "document_info.document_date",
+          "quote": "Document date: 2026-10-30",
+          "start": 209,
+          "end": 234,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "transaction_party.issuer",
+          "quote": "Issuer: Demo Ocean Logistics",
+          "start": 236,
+          "end": 264,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "transaction_party.recipient",
+          "quote": "Recipient: Demo Trading Ltd",
+          "start": 266,
+          "end": 293,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "transaction_party.payer",
+          "quote": "Payer: Demo Trading Ltd",
+          "start": 295,
+          "end": 318,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "transaction_party.payee",
+          "quote": "Payee: Demo Ocean Logistics",
+          "start": 320,
+          "end": 347,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "charge_details.original_charge_item",
+          "quote": "Handling Fee | 40.00 | USD | PP",
+          "start": 577,
+          "end": 608,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "charge_details.amount",
+          "quote": "40.00",
+          "start": 487,
+          "end": 492,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "charge_details.currency",
+          "quote": "USD",
+          "start": 483,
+          "end": 486,
+          "source_id": "src-0002-f492056c7656"
+        },
+        {
+          "path": "charge_details.payment_term",
+          "quote": "PP",
+          "start": 606,
+          "end": 608,
+          "source_id": "src-0002-f492056c7656"
+        }
+      ],
+      "issues": [],
+      "confidence": 1.0,
+      "matched_bill_id": "demo-existing-handling-001",
+      "changed_fields": [
+        "charge_details.amount"
+      ],
+      "previous_values": {
+        "charge_details.amount": 30.00
+      },
+      "proposed_operation": "UPDATE"
+    }
+  },
+  {
+    "bill_id": "bill-e13c39dd0c962b541d73bf89",
+    "operation": "PENDING_REVIEW",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "DEMO-REVIEW-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": null,
+      "booking_no": null,
+      "container_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics"
+    },
+    "charge_details": {
+      "original_charge_item": "Handling Fee",
+      "charge_item": "Handling Charge",
+      "amount": 50.00,
+      "currency": null,
+      "payment_term": null,
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP"
+    },
+    "audit_trail": {
+      "ai_reasoning": [
+        "从 03-currency-to-confirm.eml 的 Handling Fee | $50.00 提取费用",
+        "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+      ],
+      "sources": [
+        "src-0003-7249e18d9892"
+      ],
+      "evidence": [
+        {
+          "path": "document_info.document_type",
+          "quote": "Invoice DEMO-REVIEW-001",
+          "start": 192,
+          "end": 215,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "document_info.reference_no",
+          "quote": "Invoice DEMO-REVIEW-001",
+          "start": 192,
+          "end": 215,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "document_info.document_date",
+          "quote": "Document date: 2026-10-30",
+          "start": 217,
+          "end": 242,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "transaction_party.issuer",
+          "quote": "Issuer: Demo Ocean Logistics",
+          "start": 244,
+          "end": 272,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "transaction_party.recipient",
+          "quote": "Recipient: Demo Trading Ltd",
+          "start": 274,
+          "end": 301,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "transaction_party.payer",
+          "quote": "Payer: Demo Trading Ltd",
+          "start": 303,
+          "end": 326,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "transaction_party.payee",
+          "quote": "Payee: Demo Ocean Logistics",
+          "start": 328,
+          "end": 355,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "charge_details.original_charge_item",
+          "quote": "Handling Fee",
+          "start": 449,
+          "end": 461,
+          "source_id": "src-0003-7249e18d9892"
+        },
+        {
+          "path": "charge_details.amount",
+          "quote": "$50.00",
+          "start": 464,
+          "end": 470,
+          "source_id": "src-0003-7249e18d9892"
+        }
+      ],
+      "issues": [
+        "Currency not specified for amount $50.00 - requires confirmation",
+        "INVALID_OR_MISSING_CURRENCY",
+        "LOW_CONFIDENCE"
+      ],
+      "confidence": 0.8,
+      "matched_bill_id": null,
+      "changed_fields": [],
+      "previous_values": {},
+      "proposed_operation": "CREATE"
+    }
+  }
+]

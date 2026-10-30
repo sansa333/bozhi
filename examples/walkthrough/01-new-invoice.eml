@@ -1,0 +1,21 @@
+Subject: DEMO-INV-001 | New shipping charges
+From: billing@example.invalid
+To: finance@example.invalid
+Date: Fri, 30 Oct 2026 09:00:00 +0800
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+SYNTHETIC EXAMPLE - NOT A REAL BILL
+Invoice DEMO-INV-001
+Document date: 2026-10-30
+Issuer: Demo Ocean Logistics
+Recipient: Demo Trading Ltd
+Payer: Demo Trading Ltd
+Payee: Demo Ocean Logistics
+Demo Trading Ltd pays Demo Ocean Logistics for the following actual charges.
+
+Description | Amount | Currency | Payment term
+Handling Fee | 65.00 | USD | PP
+Doc Fee | 35.00 | USD | PP
+TOTAL USD 100.00
