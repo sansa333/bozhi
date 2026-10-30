@@ -102,53 +102,6 @@ uv run shipping-agent serve --port 8010
 
 打开 [本地工作台](http://127.0.0.1:8010/)。Linux/macOS 也可使用 `uv sync` 和 `uv run shipping-agent serve`，首次配置时自行将 `.env.example` 复制为 `.env`。
 
-### 直接复现本页的三种案例
-
-```powershell
-# 无需密钥，重放已经保存的真实抽取快照，不发起新的模型或 OCR 调用
-uv run python scripts/run_walkthrough.py --replay
-
-# 使用你自己的 .env，真实调用模型处理同样的输入
-uv run python scripts/run_walkthrough.py --live
-```
-
-结果默认写入 `output/walkthrough.json` 和 `output/walkthrough.report.json`。重放会明确标记 `extraction_mode=replay`，不能作为一次新的模型可用性或准确率验证。
-
-如只想离线查看基础 CREATE/UPDATE 规则，也可以运行 `uv run python scripts/demo.py`。该命令使用另一组合成快照，不会调用模型。
-
-## 大模型现在能不能调用？
-
-2026-10-30 北京时间 13:50 的小规模检查已成功，请求模型名为 `glm-4.5-flash`，输入 15、输出 4，共 19 个 token。完整的脱敏记录见 [模型检查结果](docs/model-status.json) 和 [核查说明](docs/model-status.md)。这只是当时的可用性记录，不是持续可用承诺。
-
-**调用成功不等于查到了账户余额。** 本项目没有查询你的付费余额、赠送额度有效期或套餐剩余量。初次请求遇到过服务端网络错误，重试后恢复；直接请求新型号时也观察到限流与超时。
-
-智谱官方已说明 GLM-4.7-Flash 替换 GLM-4.5-Flash，旧请求会路由至新型号。当前保留这次已实测成功的兼容模型名；如按官方指引更换 `LLM_MODEL`，请先重新运行 `doctor --live`。[官方公告](https://www.zhipuai.cn/zh/news/148)、[模型文档](https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash)
-
-## PDF 和图片还需要什么？
-
-默认 `remote` 模式使用题目指定的 OCR 接口。该服务需要可下载的公网 HTTPS 地址，不能读取你的本机路径。把授权使用的下载地址配置为“文件 SHA256 → URL”清单，然后在网页“连接设置”中填写，或通过 CLI 的 `--urls` 传入。
-
-```powershell
-uv run shipping-agent inspect '<你的材料目录>' --out output/manifest.json
-```
-
-EML、Excel、DOCX 可以直接解析；本页的三份合成邮件不依赖远程 OCR。开发时也可在后台将 `OCR_MODE` 改成 `local`，用本地方式预览 PDF 和图片，但结果会保留待确认标记，不能冒充指定 OCR 的验收结果。
-
-指定 OCR 已使用公开测试 PDF 验证能响应。其实际返回可能是结构化业务对象而非原始文字，这种结果会要求对照原件核查。用户原始账单经指定 OCR 的完整识别尚未验收。[详细使用和接口配置](docs/usage.md)
-
-## 决策边界
-
-| 情况 | 行为 |
-|---|---|
-| 有效费用，没有匹配旧账 | 建议 `CREATE` |
-| 唯一匹配旧账，且存在明确修改指令和字段证据 | 建议 `UPDATE`，保留其他字段 |
-| 与旧账相同，无需变更 | `NO_CHANGE` |
-| 币种缺失、方向不明、证据不足、金额冲突或多重匹配 | `PENDING_REVIEW` |
-
-模型提取候选字段，代码负责证据、财务校验和操作建议。合计引文遗漏时，只有原文中存在唯一、明确、同币种且同金额的 TOTAL 行，才能用规则补充引文，不通过明细求和虚构原始合计。该补充会记录在运行事件中。
-
-同名费用不直接合并；裸 `$` 不直接当作 USD；Debit Note/Credit Note 不单独决定 AR/AP；null 不覆盖已有值。更多设计、harness 和业务思考见 [设计说明](docs/design.md)。
-
 ## 仓库结构
 
 ```text
