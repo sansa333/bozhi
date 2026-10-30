@@ -4,7 +4,7 @@
 
 泊知面向航运和国际货代费用整理，使用 **Python、LangChain、智谱 GLM 和确定性校验规则**。它可以提取费用、对照旧账、判断收付方向，将不明确的内容留给人确认，并导出标准 JSON 或 CSV。系统生成操作建议，不直接入账。
 
-**本地网页 · 多格式解析 · 逐字段证据 · 增量更新 · 103 项自动化测试**
+**本地网页 · 多格式解析 · 逐字段证据 · 增量更新 · 157 项自动化测试**
 
 维护者 [sansa333](https://github.com/sansa333) · [GitHub 仓库](https://github.com/sansa333/bozhi)
 
@@ -109,6 +109,7 @@ shipping-bill-agent/
 ├── src/shipping_agent/   # 解析、模型抽取、证据校验、账单规则、API 与前端
 ├── tests/                # 默认离线的回归与接口测试
 ├── examples/walkthrough/ # 可分发的合成输入、实际输出与抽取快照
+├── examples/acceptance/  # 多格式与完整业务场景的合成验收材料
 ├── docs/assets/          # 本 README 的真实界面截图与 SVG 流程图
 ├── docs/                 # 使用说明、harness 设计、验证范围与模型检查记录
 ├── scripts/              # 演示、文档检查、材料评测、打包
@@ -137,9 +138,10 @@ uv run python scripts/package.py
 |---|---|
 | [部署与详细使用](docs/usage.md) | CLI、OCR、格式支持、API 与 Docker |
 | [设计与业务思考](docs/design.md) | harness、证据、会计判断与生产边界 |
+| [题目要求与完整验收](docs/acceptance.md) | 14 个合成场景、全字段检查、指定 OCR 和贷项处理 |
 | [验证记录](docs/validation.md) | 已通过的检查与尚未完成的外部验收 |
 | [模型状态](docs/model-status.md) | 连通性、错误类型与额度能确认到什么程度 |
 | [开发说明](CONTRIBUTING.md) | 本地开发和修改检查 |
 | [数据与凭据](SECURITY.md) | 密钥、运行数据与问题报告方式 |
 
-当前是可运行的本地单进程工作台。任务状态不跨服务重启续跑，已完成报告可从历史记录恢复；DOC 需要 LibreOffice；Docker 配置已提供但尚未在本机运行验收。生产多租户、并发账本写入、审批和财务系统连接需要另行接入。
+当前是可运行的本地单进程工作台。任务状态不跨服务重启续跑，已完成报告可从历史记录恢复；DOC 使用 LibreOffice 或 Windows Word；容器检查见 GitHub Actions。生产多租户、并发账本写入、审批和财务系统连接需要另行接入。

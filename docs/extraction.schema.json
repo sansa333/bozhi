@@ -186,6 +186,18 @@
           ],
           "default": null,
           "title": "Container No"
+        },
+        "original_reference_no": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Original Reference No"
         }
       },
       "title": "DocumentInfo",
@@ -352,6 +364,21 @@
       },
       "description": "Totals keyed by ISO currency",
       "title": "Totals",
+      "type": "object"
+    },
+    "subtotals": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "description": "Pre-tax subtotals by ISO currency",
+      "title": "Subtotals",
       "type": "object"
     },
     "tax": {

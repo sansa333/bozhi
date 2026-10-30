@@ -5,7 +5,8 @@ const state = {files:[], existing:'[]', report:null, filter:'ALL', busy:false, j
 const operations = {CREATE:'建议新增',UPDATE:'建议更新',NO_CHANGE:'无需变更',PENDING_REVIEW:'需要确认'};
 const fields = {'document_info.document_type':'单据类型','document_info.reference_no':'单据编号',
  'document_info.document_date':'单据日期','document_info.bill_of_lading':'提单号','document_info.booking_no':'订舱号',
- 'document_info.container_no':'箱号','transaction_party.issuer':'签发方','transaction_party.recipient':'接收方',
+ 'document_info.container_no':'箱号','document_info.original_reference_no':'关联原单编号',
+ 'transaction_party.issuer':'签发方','transaction_party.recipient':'接收方',
  'transaction_party.payer':'付款方','transaction_party.payee':'收款方','charge_details.original_charge_item':'原始费用名称',
  'charge_details.charge_item':'标准费用名称','charge_details.amount':'金额','charge_details.currency':'币种',
  'charge_details.payment_term':'付款约定','charge_details.quantity':'数量','charge_details.unit_price':'单价',
@@ -14,6 +15,11 @@ const issues = {
  LOCAL_PREVIEW_REQUIRES_EXAM_OCR:'此文件使用本地预览解析，仍需要通过指定文档服务复核。',
  OCR_PUBLIC_URL_REQUIRED:'文档服务还无法读取这份文件。请在连接设置中补充文件访问清单。',
  OCR_STRUCTURED_WITHOUT_ORIGINAL_TEXT_REQUIRES_REVIEW:'文档服务返回了结构化信息，尚需对照原始单据核实。',
+ OCR_ORIGINAL_EVIDENCE_UNAVAILABLE:'已取得识别结果，但无法读取可核查的原文，请对照原件确认。',
+ OCR_MODEL_CHARGE_MISMATCH:'文档服务与模型提取的费用不一致，需要对照原件核查。',
+ OCR_NUMERIC_AMBIGUITY:'金额附近存在字母与数字混淆，未自动改写，请核查原件。',
+ OCR_CHARGE_SCHEMA_UNSUPPORTED:'文档服务返回了尚未支持的费用字段格式。',
+ OCR_CHARGE_AMOUNT_UNRESOLVED:'文档服务返回的金额无法可靠确认。',
  ACCOUNTING_ENTITY_REQUIRED:'请确认费用记在哪家公司，以便判断应收或应付。',
  AR_AP_DIRECTION_UNRESOLVED:'目前还不能确定收付款方向，请对照交易双方确认。',
  INVALID_OR_MISSING_CURRENCY:'币种缺失或无法可靠确认，请查看原文后补充。',
@@ -30,6 +36,14 @@ const issues = {
  IDENTICAL_ROWS_REQUIRE_REVIEW:'发现内容相同的费用行，请确认是重复提取还是不同的真实费用。',
  DUPLICATE_SOURCE_ROW:'同一来源行被重复提取，需要检查。',
  CREDIT_NOTE_ACCOUNTING_POLICY_REQUIRED:'这笔费用涉及贷项或负金额，需要确认会计处理方式。',
+ CREDIT_ORIGINAL_BILL_NOT_UNIQUE:'无法唯一关联贷项对应的原账单，请检查原单编号及旧账。',
+ CREDIT_ORIGINAL_PARTIES_UNRESOLVED:'贷项的交易双方与原账单不能可靠对应。',
+ CREDIT_EXCEEDS_ORIGINAL_BALANCE:'贷项金额超过原账单剩余可冲减金额，请核查历史贷项。',
+ CREDIT_DUPLICATE_CONFLICT:'发现同编号贷项，但金额或账务属性不同。',
+ CREDIT_REQUIRES_DISTINCT_DOCUMENT_REFERENCE:'贷项需要独立单据编号，不能覆盖原账单。',
+ CREDIT_AMOUNT_REQUIRED:'贷项缺少有效的非零金额。',
+ CREDIT_INVALID_PRIOR_ADJUSTMENT:'原账单关联的历史贷项信息不完整或存在冲突。',
+ MULTIPLE_CREDITS_FOR_ONE_ORIGINAL_BILL:'同批多笔贷项指向同一原单，请确认处理顺序和剩余金额。',
  UNKNOWN_PAYMENT_TERM:'付款约定未能匹配已知类型，请查看原文。',
  TEXT_TRUNCATED:'文件文字超过本次处理上限，部分内容尚未读取。',
  DOCUMENT_RESOURCE_LIMIT:'文件或附件超过本次处理上限，请拆分后重新上传。',
@@ -48,9 +62,12 @@ function el(tag, cls='', text) {const node=document.createElement(tag);if(cls)no
 function toast(message,error=false){const t=$('#toast');t.textContent=message;t.classList.toggle('error',error);t.hidden=false;
   clearTimeout(t._timer);t._timer=setTimeout(()=>{t.hidden=true;},5000);}
 function explain(issue){if(issues[issue])return issues[issue];const [code,...rest]=issue.split(':');
-  const detail=rest.join(':');if(code==='UNGROUNDED_FIELD')return `“${fields[detail]||detail.replace('totals.','合计 ').replace('tax.','税额 ')}”的原文依据还不充分，需要核实。`;
+  const detail=rest.join(':');if(code==='UNGROUNDED_FIELD')return `“${fields[detail]||detail.replace('subtotals.','小计 ').replace('totals.','合计 ').replace('tax.','税额 ')}”的原文依据还不充分，需要核实。`;
   if(code==='UNAUTHORIZED_DIFFERENCE')return `“${fields[detail]||detail}”与旧账单不同，但未找到明确修改指令，原值已保留。`;
   if(code==='TOTAL_MISMATCH')return `${detail} 明细与合计金额不一致，请检查是否遗漏、重复或包含税费。`;
+  if(code==='SUBTOTAL_MISMATCH')return `${detail} 明细与税前小计不一致，请核查。`;
+  if(code==='OCR_FAILED')return '文档识别服务暂未能处理这份文件，请检查文件访问配置或稍后重试。';
+  if(code==='OCR_IDENTIFIER_AMBIGUITY')return `${fields[detail]||detail} 存在 O/0 或 I/1 混淆风险，已留空，请核对原件。`;
   if(code==='EXTRACTION_FAILED')return '这份材料未能可靠提取，请检查文件内容后重试。';
   if(code==='PARSE_FAILED')return '读取文件时遇到问题，请检查文件是否完整，或转换格式后重试。';
   return issue;}
@@ -178,6 +195,9 @@ function openRecord(r){$('#record-title').textContent=r.charge_details.charge_it
   const grid=el('div','detail-grid');grid.append(detailField('处理建议',operations[r.operation]),detailField('金额',r.charge_details.amount==null?null:`${money(amountFor(r))} ${r.charge_details.currency||'币种待确认'}`),
     detailField('单据编号 / 提单号',r.document_info.reference_no||r.document_info.bill_of_lading),detailField('当前记账公司',r.financial_attributes.accounting_entity),
     detailField('收付方向',r.financial_attributes.posting_type==='AR'?'应收':r.financial_attributes.posting_type==='AP'?'应付':null),detailField('文件来源',sourceNames(r).join('、')));
+  if(r.financial_attributes.entry_type==='REVERSAL')grid.append(
+    detailField('账务处理','关联原单冲减'),detailField('关联原账单',r.document_info.original_reference_no),
+    detailField('原单记录编号',r.financial_attributes.original_bill_id));
   content.append(grid);if(r.audit_trail.issues.length){content.append(el('h3','detail-heading','这些地方，需要你再看一眼'));const list=el('ul','issue-list');
     for(const issue of r.audit_trail.issues)list.append(el('li','',explain(issue)));content.append(list);}
   if(r.audit_trail.changed_fields.length){content.append(el('h3','detail-heading','明确提出的字段变更'));

@@ -1,9 +1,6 @@
 import hashlib
 import io
 import json
-import shutil
-import subprocess
-import tempfile
 import zipfile
 from email import policy
 from email.parser import BytesParser
@@ -13,7 +10,8 @@ from bs4 import BeautifulSoup
 
 from .config import Settings
 from .models import Source
-from .ocr import RemoteOCR
+from .ocr import OCRFailure, RemoteOCR, structured_charges
+from .office import convert_office, find_libreoffice, has_word
 
 
 def digest(data: bytes) -> str:
@@ -38,6 +36,7 @@ class Parser:
         self.raw_ocr: dict[str, object] = {}
         self.total_bytes = 0
         self._ocr = None
+        self._raster_ocr_used = False
 
     def parse_file(self, path: Path) -> list[Source]:
         size = path.stat().st_size
@@ -91,17 +90,60 @@ class Parser:
             elif kind in {".pdf", ".image", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}:
                 if self.s.ocr_mode == "remote":
                     url = self.urls.get(sha)
-                    if not url:
-                        source.issues.append("OCR_PUBLIC_URL_REQUIRED")
-                    else:
+                    raw = None
+                    if url:
                         source.text, raw = RemoteOCR(self.s).recognize(url)
+                    elif self.s.ocr_file_base_url:
+                        from .file_store import OCRFileStore
+                        # The specified endpoint rejected TIFF in live testing. Convert each frame
+                        # to lossless PNG while keeping the original TIFF SHA256 and evidence text.
+                        if data.startswith((b"II*\x00", b"MM\x00*")):
+                            from PIL import Image
+                            image = Image.open(io.BytesIO(data))
+                            if image.n_frames > self.s.max_pages:
+                                raise ValueError("IMAGE_PAGE_LIMIT")
+                            payloads = []
+                            for frame in range(image.n_frames):
+                                image.seek(frame)
+                                if image.width * image.height > 24_000_000:
+                                    raise ValueError("IMAGE_PIXEL_LIMIT")
+                                buffer = io.BytesIO()
+                                image.convert("RGB").save(buffer, format="PNG")
+                                with OCRFileStore(self.s).publish(buffer.getvalue(), ".png") as file_url:
+                                    _, payload = RemoteOCR(self.s).recognize(file_url)
+                                payloads.append(payload)
+                            image.close()
+                            # Only the observed synchronous structured contract is merged.
+                            merged = [item for payload in payloads for item in payload["data"]["list"]]
+                            raw = {"success": True, "data": {"list": merged},
+                                   "transport": "TIFF_FRAMES_AS_PNG", "original_sha256": sha,
+                                   "frame_responses": payloads}
+                            from .ocr import ocr_text
+                            source.text = ocr_text(raw)
+                        else:
+                            with OCRFileStore(self.s).publish(data, kind) as file_url:
+                                source.text, raw = RemoteOCR(self.s).recognize(file_url)
+                    else:
+                        source.issues.append("OCR_PUBLIC_URL_REQUIRED")
+                    if raw is not None:
                         self.raw_ocr[source.source_id] = raw
                         source.method = "exam-ocr-api"
                         if source.text.startswith("[OCR_STRUCTURED_DATA;"):
-                            source.method = "exam-ocr-api-structured"
-                            source.issues.append("OCR_STRUCTURED_WITHOUT_ORIGINAL_TEXT_REQUIRES_REVIEW")
+                            source.ocr_charge_rows, contract_issues = structured_charges(raw)
+                            source.issues.extend(contract_issues)
+                            self._raster_ocr_used = False
+                            original = self.local_text(data, kind)
+                            source.raster_ocr_used = self._raster_ocr_used
+                            if original.strip():
+                                source.text = original
+                                source.method = "exam-ocr-api+local-evidence"
+                            else:
+                                source.method = "exam-ocr-api-structured"
+                                source.issues.append("OCR_ORIGINAL_EVIDENCE_UNAVAILABLE")
                 else:
+                    self._raster_ocr_used = False
                     source.text = self.local_text(data, kind)
+                    source.raster_ocr_used = self._raster_ocr_used
                     source.method = "local-preview"
                     source.issues.append("LOCAL_PREVIEW_REQUIRES_EXAM_OCR")
             elif kind == ".xlsx":
@@ -139,8 +181,13 @@ class Parser:
                         if count > 200000:
                             raise ValueError("EXCEL_CELL_LIMIT")
                         parts.append(f"[SHEET {sheet.name}]")
-                        parts += [f"row {i+1}: " + " | ".join(map(str, sheet.row_values(i)))
-                                  for i in range(sheet.nrows)]
+                        for i in range(sheet.nrows):
+                            cells = []
+                            for cell in sheet.row(i):
+                                value = (xlrd.xldate_as_datetime(cell.value, book.datemode).isoformat()
+                                         if cell.ctype == xlrd.XL_CELL_DATE else cell.value)
+                                cells.append(str(value))
+                            parts.append(f"row {i+1}: " + " | ".join(cells))
                     source.text = "\n".join(parts)
                     source.method = "xlrd"
                 finally:
@@ -149,19 +196,11 @@ class Parser:
                 source.text = self.word_text(data)
                 source.method = "python-docx"
             elif kind == ".doc":
-                binary = shutil.which("soffice") or shutil.which("libreoffice")
-                if not binary:
+                if not find_libreoffice(self.s) and not has_word():
                     source.issues.append("DOC_REQUIRES_LIBREOFFICE")
                 else:
-                    with tempfile.TemporaryDirectory() as tmp:
-                        work = Path(tmp)
-                        (work / "input.doc").write_bytes(data)
-                        subprocess.run([binary, f"-env:UserInstallation={(work / 'profile').as_uri()}",
-                                        "--headless", "--convert-to", "docx", "--outdir", tmp,
-                                        str(work / "input.doc")], check=True, timeout=45,
-                                       capture_output=True)
-                        source.text = self.word_text((work / "input.docx").read_bytes())
-                        source.method = "libreoffice+python-docx"
+                    source.text = self.word_text(convert_office(data, ".doc", "docx", self.s))
+                    source.method = ("libreoffice" if find_libreoffice(self.s) else "word") + "+python-docx"
             else:
                 source.issues.append("UNSUPPORTED_FORMAT")
             if len(source.text) > self.s.max_text_chars:
@@ -169,6 +208,9 @@ class Parser:
                 source.issues.append("TEXT_TRUNCATED")
             if not source.text.strip() and not source.issues:
                 source.issues.append("EMPTY_DOCUMENT")
+        except OCRFailure as exc:
+            # OCRFailure messages are adapter-authored constants, never provider response bodies.
+            source.issues.append("OCR_FAILED:" + str(exc))
         except Exception as exc:
             # File contents, URL query strings and HTTP headers must not leak into logs.
             source.issues.append(f"PARSE_FAILED:{type(exc).__name__}")
@@ -191,17 +233,30 @@ class Parser:
         return "\n".join(parts)
 
     def image_text(self, data: bytes) -> str:
+        self._raster_ocr_used = True
         import numpy as np
         from PIL import Image, ImageOps
         from rapidocr_onnxruntime import RapidOCR
-        image = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert("RGB")
-        if image.width * image.height > 24_000_000:
-            raise ValueError("IMAGE_PIXEL_LIMIT")
-        if self._ocr is None:
-            self._ocr = RapidOCR()
-        rows, _ = self._ocr(np.array(image))
-        if not rows:
-            return ""
+        document = Image.open(io.BytesIO(data))
+        count = getattr(document, "n_frames", 1)
+        if count > self.s.max_pages:
+            raise ValueError("IMAGE_PAGE_LIMIT")
+        texts = []
+        for i in range(count):
+            document.seek(i)
+            image = ImageOps.exif_transpose(document).convert("RGB")
+            if image.width * image.height > 24_000_000:
+                raise ValueError("IMAGE_PIXEL_LIMIT")
+            if self._ocr is None:
+                self._ocr = RapidOCR()
+            rows, _ = self._ocr(np.array(image))
+            text = self.image_rows(rows or [])
+            texts.append((f"[FRAME {i+1}]\n" if count > 1 else "") + text)
+        document.close()
+        return "\n".join(texts)
+
+    @staticmethod
+    def image_rows(rows) -> str:
         # Preserve geometric row structure for invoices, not one isolated word per line.
         groups: list[list] = []
         for box, text, score in sorted(rows, key=lambda r: (r[0][0][1], r[0][0][0])):

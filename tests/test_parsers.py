@@ -78,7 +78,8 @@ def test_remote_pdf_requires_public_url(settings):
 
 
 def test_doc_reports_missing_converter(settings, monkeypatch):
-    monkeypatch.setattr("shipping_agent.parsers.shutil.which", lambda _: None)
+    monkeypatch.setattr("shipping_agent.parsers.find_libreoffice", lambda _: None)
+    monkeypatch.setattr("shipping_agent.parsers.has_word", lambda: False)
     s = Parser(settings).parse_bytes(b"fake legacy doc", "bill.doc")[0]
     assert s.issues == ["DOC_REQUIRES_LIBREOFFICE"]
 
@@ -102,3 +103,37 @@ def test_office_zip_expansion_limit(settings):
     settings.max_batch_bytes = 1000
     s = Parser(settings).parse_bytes(b.getvalue(), "x.xlsx")[0]
     assert s.issues == ["PARSE_FAILED:ValueError"]
+
+
+def test_legacy_excel_date_is_read_as_date_not_serial(settings):
+    from datetime import datetime
+
+    import xlwt
+    workbook = xlwt.Workbook()
+    workbook.add_sheet("Invoice").write(0, 0, datetime(2026, 10, 30), xlwt.easyxf(num_format_str="YYYY-MM-DD"))
+    buffer = io.BytesIO()
+    workbook.save(buffer)
+    source = Parser(settings).parse_bytes(buffer.getvalue(), "dated.xls")[0]
+    assert "2026-10-30" in source.text
+
+
+def test_all_tiff_frames_are_read_and_page_limit_applies(settings):
+    from PIL import Image
+    first, second = Image.new("RGB", (20, 20), "white"), Image.new("RGB", (20, 20), "black")
+    buffer = io.BytesIO()
+    first.save(buffer, format="TIFF", save_all=True, append_images=[second])
+    parser = Parser(settings)
+    calls = []
+
+    def recognize(image):
+        calls.append(image.mean())
+        return [([[0, 0], [10, 0], [10, 10], [0, 10]], "page fee", .99)], None
+
+    parser._ocr = recognize
+    text = parser.image_text(buffer.getvalue())
+    assert "[FRAME 1]" in text and "[FRAME 2]" in text
+    assert len(calls) == 2 and calls[0] != calls[1]
+    settings.max_pages = 1
+    import pytest
+    with pytest.raises(ValueError, match="IMAGE_PAGE_LIMIT"):
+        parser.image_text(buffer.getvalue())

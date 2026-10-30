@@ -1,0 +1,146 @@
+{
+  "observed_on": "2026-10-30",
+  "synthetic_data": true,
+  "endpoint": "https://gateway.pltplt.com/ai/process",
+  "signed_file_urls_included": false,
+  "observations": [
+    {
+      "case": "pdf",
+      "run_id": "37624f2a1a4a4f5cb53c06182088e415",
+      "success": true,
+      "transport": "original_file",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "png",
+      "run_id": "ee6bb1dd00fc49e283b756fc397c5fe0",
+      "success": true,
+      "transport": "original_file",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "jpg",
+      "run_id": "4a6c443a47fe46e4a4c22473eb4bc007",
+      "success": true,
+      "transport": "original_file",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "tiff",
+      "run_id": "b72bc7c867204f73abc932aa46f1aadc",
+      "success": true,
+      "transport": "TIFF_FRAMES_AS_PNG",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "scanned-pdf",
+      "run_id": "b34933a59058468e803e3877d0dac3ed",
+      "success": true,
+      "transport": "original_file",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "eml-attachment",
+      "run_id": "219f508c1e6f44c089b3649d1dbbdff2",
+      "success": true,
+      "transport": "original_file",
+      "items": [
+        {
+          "invoiceNumber": "",
+          "chargeList": [
+            {
+              "chargeItem": "Handling Fee",
+              "amount": "65.00",
+              "chargeCtr": ""
+            },
+            {
+              "chargeItem": "Doc Fee",
+              "amount": "35.00",
+              "chargeCtr": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

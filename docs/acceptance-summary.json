@@ -1,0 +1,248 @@
+{
+  "synthetic_data": true,
+  "mode": "replay",
+  "completed_cases": 14,
+  "all_passed": true,
+  "fields_checked": 598,
+  "fields_safely_rejected": 22,
+  "fields_matched": 576,
+  "cases": [
+    {
+      "case": "pdf",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 52,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 0,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "png",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 46,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 6,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "jpg",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 46,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 6,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "tiff",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 46,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 6,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "scanned-pdf",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 48,
+      "evidence_checked": 32,
+      "fields_safely_rejected": 4,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "eml-attachment",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 52,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 0,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "eml-ar",
+      "passed": true,
+      "fields_checked": 26,
+      "fields_matched": 26,
+      "evidence_checked": 17,
+      "fields_safely_rejected": 0,
+      "record_count": 1,
+      "differences": []
+    },
+    {
+      "case": "xlsx-update",
+      "passed": true,
+      "fields_checked": 26,
+      "fields_matched": 26,
+      "evidence_checked": 15,
+      "fields_safely_rejected": 0,
+      "record_count": 1,
+      "differences": []
+    },
+    {
+      "case": "xls-same-name",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 52,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 0,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "docx-tax",
+      "passed": true,
+      "fields_checked": 26,
+      "fields_matched": 26,
+      "evidence_checked": 19,
+      "fields_safely_rejected": 0,
+      "record_count": 1,
+      "differences": []
+    },
+    {
+      "case": "doc-credit",
+      "passed": true,
+      "fields_checked": 26,
+      "fields_matched": 26,
+      "evidence_checked": 16,
+      "fields_safely_rejected": 0,
+      "record_count": 1,
+      "differences": []
+    },
+    {
+      "case": "currency-review",
+      "passed": true,
+      "fields_checked": 26,
+      "fields_matched": 26,
+      "evidence_checked": 15,
+      "fields_safely_rejected": 0,
+      "record_count": 1,
+      "differences": []
+    },
+    {
+      "case": "duplicate",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 52,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 0,
+      "record_count": 2,
+      "differences": []
+    },
+    {
+      "case": "conflict",
+      "passed": true,
+      "fields_checked": 52,
+      "fields_matched": 52,
+      "evidence_checked": 34,
+      "fields_safely_rejected": 0,
+      "record_count": 2,
+      "differences": []
+    }
+  ],
+  "verified_on": "2026-10-30",
+  "automated_tests_passed": 157,
+  "live_captures": [
+    {
+      "case": "pdf",
+      "run_id": "37624f2a1a4a4f5cb53c06182088e415",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "png",
+      "run_id": "ee6bb1dd00fc49e283b756fc397c5fe0",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "jpg",
+      "run_id": "4a6c443a47fe46e4a4c22473eb4bc007",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "tiff",
+      "run_id": "b72bc7c867204f73abc932aa46f1aadc",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "scanned-pdf",
+      "run_id": "b34933a59058468e803e3877d0dac3ed",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "eml-attachment",
+      "run_id": "219f508c1e6f44c089b3649d1dbbdff2",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "eml-ar",
+      "run_id": "5b51501d80bf4b5986039c2a281f3087",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "xlsx-update",
+      "run_id": "5797212101c84fbfaf66c99def828711",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "xls-same-name",
+      "run_id": "8c9c8ae273174f759b1a2999cf52ddbc",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "docx-tax",
+      "run_id": "cbea7be44bee44cd9ff11b88d10cbf78",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "doc-credit",
+      "run_id": "40a45ea2235b4074aaf4502232072a48",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "currency-review",
+      "run_id": "041f75c23cdd412ea7a9174b2bbda9ba",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "duplicate",
+      "run_id": "94c57b3452ce4a0281fd05bd7a0db18c",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    },
+    {
+      "case": "conflict",
+      "run_id": "7ed3227ef32a4e68bae7a421377730e9",
+      "model": "glm-4.5-flash",
+      "mode": "live"
+    }
+  ],
+  "live_ocr_case_count": 6,
+  "live_record_operations": {
+    "CREATE": 10,
+    "PENDING_REVIEW": 11,
+    "UPDATE": 1,
+    "NO_CHANGE": 1
+  },
+  "private_materials_uploaded": false,
+  "strict_decimal_json_parser_live_verified": true
+}

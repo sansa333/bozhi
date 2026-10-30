@@ -1,0 +1,49 @@
+[
+  {
+    "bill_id": "synthetic-original-credit-001",
+    "operation": "CREATE",
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-ORIGINAL-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics Ltd"
+    },
+    "charge_details": {
+      "original_charge_item": "Handling Fee",
+      "charge_item": "Handling Charge",
+      "amount": 30.00,
+      "currency": "USD",
+      "payment_term": "PP",
+      "quantity": null,
+      "unit_price": null,
+      "line_id": null
+    },
+    "financial_attributes": {
+      "accounting_entity": "Demo Trading Ltd",
+      "posting_type": "AP",
+      "entry_type": "NORMAL",
+      "original_bill_id": null
+    },
+    "audit_trail": {
+      "ai_reasoning": [],
+      "sources": [],
+      "evidence": [],
+      "issues": [],
+      "confidence": 0,
+      "matched_bill_id": null,
+      "changed_fields": [],
+      "previous_values": {},
+      "proposed_operation": null,
+      "accounting_adjustment": {}
+    }
+  }
+]

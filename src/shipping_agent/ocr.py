@@ -3,6 +3,7 @@ import ipaddress
 import json
 import socket
 import time
+from decimal import Decimal, InvalidOperation
 from urllib.parse import urlparse
 
 import requests
@@ -12,6 +13,33 @@ from .config import Settings
 
 class OCRFailure(RuntimeError):
     pass
+
+
+def structured_charges(payload: dict) -> tuple[list[dict[str, str]], list[str]]:
+    """The observed exam contract: data.list[].chargeList[].chargeItem/amount.
+
+    Currency, payer/payee and signed credit semantics are NOT present in this contract.
+    They must come from independently grounded document fields, never from guessed keys.
+    """
+    rows, issues = [], []
+    for item in payload["data"]["list"]:
+        for row in item["chargeList"]:
+            if not isinstance(row, dict) or not isinstance(row.get("chargeItem"), str):
+                issues.append("OCR_CHARGE_SCHEMA_UNSUPPORTED")
+                continue
+            amount = row.get("amount")
+            if isinstance(amount, bool) or not row["chargeItem"].strip():
+                issues.append("OCR_CHARGE_SCHEMA_UNSUPPORTED")
+                continue
+            try:
+                number = Decimal(str(amount).replace(",", ""))
+                if not number.is_finite():
+                    raise InvalidOperation
+            except (InvalidOperation, ValueError):
+                issues.append("OCR_CHARGE_AMOUNT_UNRESOLVED")
+                continue
+            rows.append({"chargeItem": row["chargeItem"], "amount": str(number)})
+    return rows, list(dict.fromkeys(issues))
 
 
 def validate_public_url(url: str) -> str:

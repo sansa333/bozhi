@@ -1,0 +1,116 @@
+{
+  "b470acdf0660908aa5cb5efc56d429d5dceac616964b3a5d57dd2b244baa6e15": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-AR-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Trading Ltd",
+      "recipient": "Demo Customer Ltd",
+      "payer": "Demo Customer Ltd",
+      "payee": "Demo Trading Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-AR-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEMOBL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEMOBK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Customer Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Customer Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Trading Ltd"
+      },
+      {
+        "path": "totals.EUR",
+        "quote": "TOTAL EUR 100.00"
+      }
+    ],
+    "totals": {
+      "EUR": 100.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "row 2",
+        "charge_details": {
+          "original_charge_item": "Trucking Fee",
+          "charge_item": null,
+          "amount": 100.0,
+          "currency": "EUR",
+          "payment_term": "CC",
+          "quantity": 2,
+          "unit_price": 50.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Trucking Fee"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "2"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "50.00"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "100.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "EUR"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "CC"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  }
+}

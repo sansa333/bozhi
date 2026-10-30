@@ -13,7 +13,7 @@ from .config import Settings
 from .extractor import PROMPT_VERSION, LLMExtractor
 from .models import Audit, Bill, Extraction, RunReport, Source
 from .parsers import Parser, digest, read_json, write_json
-from .rules import finalize, match_bill, norm, normalize_charge, proposals, reconcile
+from .rules import credit_adjustment, finalize, match_bill, norm, normalize_charge, proposals, reconcile
 
 
 class Extractor(Protocol):
@@ -116,8 +116,12 @@ class Engine:
                         # IDs identify stable ingestion rows, not proof that a new bill should be posted.
                         new.bill_id = "bill-" + digest(
                             f"{source.sha256}|{line.source_line}|{entity}".encode())[:24]
-                        old, match = match_bill(new, existing)
-                        records.append(reconcile(new, old, match, line, source))
+                        credit = credit_adjustment(new, existing, self.s.credit_note_policy)
+                        if credit is not None:
+                            records.append(credit)
+                        else:
+                            old, match = match_bill(new, existing)
+                            records.append(reconcile(new, old, match, line, source))
                 except Exception as exc:
                     events.append({"stage": "process", "source_id": source.source_id,
                                    "ok": False, "error_type": type(exc).__name__})
@@ -131,6 +135,7 @@ class Engine:
                            metadata={"version": __version__, "prompt_version": PROMPT_VERSION,
                                      "model": self.s.llm_model, "ocr_mode": self.s.ocr_mode,
                                      "accounting_entity": entity,
+                                     "credit_note_policy": self.s.credit_note_policy,
                                      "extraction_mode": "replay" if isinstance(self.extractor, ReplayExtractor)
                                                         else "live",
                                      "seconds": round(time.monotonic()-started, 3),
@@ -195,6 +200,15 @@ class Engine:
             if len(group) > 1:
                 for bill in group:
                     bill.audit_trail.issues.append("MULTIPLE_PROPOSALS_FOR_ONE_EXISTING_BILL")
+                    finalize(bill)
+        credits = defaultdict(list)
+        for bill in records:
+            if bill.financial_attributes.entry_type == "REVERSAL" and bill.operation != "NO_CHANGE":
+                credits[bill.financial_attributes.original_bill_id].append(bill)
+        for group in credits.values():
+            if len(group) > 1:
+                for bill in group:
+                    bill.audit_trail.issues.append("MULTIPLE_CREDITS_FOR_ONE_ORIGINAL_BILL")
                     finalize(bill)
 
 

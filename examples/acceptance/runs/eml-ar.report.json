@@ -1,0 +1,212 @@
+{
+  "run_id": "5b51501d80bf4b5986039c2a281f3087",
+  "records": [
+    {
+      "bill_id": "bill-27c9a6d02b2b407b5bc9af39",
+      "operation": "CREATE",
+      "document_info": {
+        "document_type": "Invoice",
+        "reference_no": "SYN-AR-001",
+        "document_date": "2026-10-30",
+        "bill_of_lading": "DEMOBL1001",
+        "booking_no": "DEMOBK1001",
+        "container_no": "DEMU1234567",
+        "original_reference_no": null
+      },
+      "transaction_party": {
+        "issuer": "Demo Trading Ltd",
+        "recipient": "Demo Customer Ltd",
+        "payer": "Demo Customer Ltd",
+        "payee": "Demo Trading Ltd"
+      },
+      "charge_details": {
+        "original_charge_item": "Trucking Fee",
+        "charge_item": "Trucking Charge",
+        "amount": 100.0,
+        "currency": "EUR",
+        "payment_term": "CC",
+        "quantity": 2,
+        "unit_price": 50.0,
+        "line_id": null
+      },
+      "financial_attributes": {
+        "accounting_entity": "Demo Trading Ltd",
+        "posting_type": "AR",
+        "entry_type": "NORMAL",
+        "original_bill_id": null
+      },
+      "audit_trail": {
+        "ai_reasoning": [
+          "从 invoice.eml 的 row 2 提取费用",
+          "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+        ],
+        "sources": [
+          "src-0001-b470acdf0660"
+        ],
+        "evidence": [
+          {
+            "path": "document_info.document_type",
+            "quote": "Invoice",
+            "start": 166,
+            "end": 173,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "document_info.reference_no",
+            "quote": "Reference No: SYN-AR-001",
+            "start": 175,
+            "end": 199,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "document_info.document_date",
+            "quote": "Document Date: 2026-10-30",
+            "start": 201,
+            "end": 226,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "document_info.bill_of_lading",
+            "quote": "Bill of Lading: DEMOBL1001",
+            "start": 377,
+            "end": 403,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "document_info.booking_no",
+            "quote": "Booking No: DEMOBK1001",
+            "start": 405,
+            "end": 427,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "document_info.container_no",
+            "quote": "Container No: DEMU1234567",
+            "start": 429,
+            "end": 454,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "transaction_party.issuer",
+            "quote": "Issuer: Demo Trading Ltd",
+            "start": 228,
+            "end": 252,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "transaction_party.recipient",
+            "quote": "Recipient: Demo Customer Ltd",
+            "start": 254,
+            "end": 282,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "transaction_party.payer",
+            "quote": "Payer: Demo Customer Ltd",
+            "start": 284,
+            "end": 308,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "transaction_party.payee",
+            "quote": "Payee: Demo Trading Ltd",
+            "start": 310,
+            "end": 333,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Trucking Fee",
+            "start": 530,
+            "end": 542,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "100.00",
+            "start": 557,
+            "end": 563,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "EUR",
+            "start": 566,
+            "end": 569,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "CC",
+            "start": 572,
+            "end": 574,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "2",
+            "start": 106,
+            "end": 107,
+            "source_id": "src-0001-b470acdf0660"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "50.00",
+            "start": 549,
+            "end": 554,
+            "source_id": "src-0001-b470acdf0660"
+          }
+        ],
+        "issues": [],
+        "confidence": 1.0,
+        "matched_bill_id": null,
+        "changed_fields": [],
+        "previous_values": {},
+        "proposed_operation": "CREATE",
+        "accounting_adjustment": {}
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "src-0001-b470acdf0660",
+      "filename": "invoice.eml",
+      "sha256": "b470acdf0660908aa5cb5efc56d429d5dceac616964b3a5d57dd2b244baa6e15",
+      "parent_id": null,
+      "media_type": ".eml",
+      "text": "Subject: Synthetic receivable\nFrom: billing@example.invalid\nTo: finance@example.invalid\nDate: Fri, 30 Oct 2026 09:00:00 +0800\n\nSYNTHETIC TEST DATA - NOT A REAL BILL\r\nInvoice\r\nReference No: SYN-AR-001\r\nDocument Date: 2026-10-30\r\nIssuer: Demo Trading Ltd\r\nRecipient: Demo Customer Ltd\r\nPayer: Demo Customer Ltd\r\nPayee: Demo Trading Ltd\r\nDemo Customer Ltd pays Demo Trading Ltd.\r\nBill of Lading: DEMOBL1001\r\nBooking No: DEMOBK1001\r\nContainer No: DEMU1234567\r\n\r\nDescription | Quantity | Unit price | Amount | Currency | Payment term\r\nTrucking Fee | 2 | 50.00 | 100.00 | EUR | CC\r\nTOTAL EUR 100.00\r\n",
+      "method": "email-stdlib",
+      "issues": [],
+      "ocr_charge_rows": null
+    }
+  ],
+  "events": [
+    {
+      "source_id": "src-0001-b470acdf0660",
+      "stage": "extract",
+      "attempt": 1,
+      "ok": true,
+      "seconds": 90.265,
+      "grounding_issues": [],
+      "prompt_version": "shipping-extraction-v4",
+      "prompt_sha256": "417df28dcc1cbecec3139fe8ab93b18df27281f4aeb513b11695e46f78e71782"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "prompt_version": "shipping-extraction-v4",
+    "model": "glm-4.5-flash",
+    "ocr_mode": "remote",
+    "accounting_entity": "Demo Trading Ltd",
+    "credit_note_policy": "linked_signed_adjustment",
+    "extraction_mode": "live",
+    "seconds": 90.265,
+    "record_count": 1,
+    "pending_count": 0,
+    "posting_performed": false,
+    "synthetic_data": true,
+    "input_sha256": {
+      "invoice.eml": "b470acdf0660908aa5cb5efc56d429d5dceac616964b3a5d57dd2b244baa6e15"
+    }
+  }
+}

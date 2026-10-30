@@ -1,7 +1,7 @@
 {
   "verified_on": "2026-10-30",
   "python": "3.12.13",
-  "unit_and_integration_tests_passed": 103,
+  "unit_and_integration_tests_passed": 157,
   "ruff": "passed",
   "live_run_id": "1912ec376f494a08b74b53239ec1a412",
   "model": "glm-4.5-flash",
@@ -18,6 +18,14 @@
   "private_materials_exam_ocr_verified": false,
   "accounting_entity_confirmed": false,
   "docker_runtime_verified": false,
-  "real_doc_converter_verified": false,
-  "final_code_replay_run_id": "6c04dca45ed140a1969065bbc457b7c3"
+  "real_doc_converter_verified": true,
+  "final_code_replay_run_id": "6c04dca45ed140a1969065bbc457b7c3",
+  "synthetic_acceptance_cases": 14,
+  "synthetic_acceptance_all_passed": true,
+  "synthetic_fields_checked": 598,
+  "synthetic_fields_matched": 576,
+  "synthetic_fields_safely_rejected": 22,
+  "synthetic_materials_exam_ocr_verified": true,
+  "real_doc_converter_backend": "Microsoft Word (Windows); LibreOffice checked in CI",
+  "strict_decimal_json_parser_live_verified": true
 }

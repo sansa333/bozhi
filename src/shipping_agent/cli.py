@@ -4,7 +4,7 @@ from pathlib import Path
 from .config import Settings
 from .diagnostics import check_model
 from .engine import Engine, ReplayExtractor, load_existing
-from .models import Extraction
+from .models import Extraction, bill_output_schema
 from .parsers import Parser, read_json, write_json
 
 
@@ -27,11 +27,22 @@ def main():
     serve = sub.add_parser("serve", help="启动本地网页和 API")
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8010)
+    serve.add_argument("--ocr-tunnel", action="store_true",
+                       help="显式启用仅供 OCR 读取短时签名文件的临时公网地址")
+    file_server = sub.add_parser("file-server", help="启动仅提供签名文件下载的独立服务")
+    file_server.add_argument("--host", default="127.0.0.1")
+    file_server.add_argument("--port", type=int, default=8011)
     doctor = sub.add_parser("doctor", help="检查配置；--live 显式发起小规模模型调用")
     doctor.add_argument("--live", action="store_true", help="最多两次短请求，不查询付费余额")
     doctor.add_argument("--out", type=Path, help="将脱敏的检查结果保存为 JSON")
     args = parser.parse_args()
     settings = Settings()
+    if args.command == "file-server":
+        import uvicorn
+
+        from .file_store import create_file_app
+        uvicorn.run(create_file_app(settings), host=args.host, port=args.port, access_log=False)
+        return
     if args.command == "doctor":
         import simplejson
         result = check_model(settings, args.live)
@@ -45,10 +56,17 @@ def main():
         import uvicorn
         if args.host not in {"127.0.0.1", "localhost", "::1"} and not settings.api_token.get_secret_value():
             parser.error("对外监听必须设置 API_TOKEN")
-        uvicorn.run("shipping_agent.api:app", host=args.host, port=args.port)
+        if args.ocr_tunnel:
+            from .tunnel import ocr_tunnel
+            with ocr_tunnel(settings, port=args.port+1):
+                print("已启用短时签名 OCR 下载，退出后自动关闭；仅上传需识别的 PDF 和图片。")
+                uvicorn.run("shipping_agent.api:app", host=args.host, port=args.port)
+        else:
+            uvicorn.run("shipping_agent.api:app", host=args.host, port=args.port)
         return
     if args.command == "schema":
         write_json(args.out, Extraction.model_json_schema())
+        write_json(args.out.with_name("bill.schema.json"), bill_output_schema())
         return
     paths = []
     for p in args.inputs:

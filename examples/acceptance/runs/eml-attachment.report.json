@@ -1,0 +1,445 @@
+{
+  "run_id": "219f508c1e6f44c089b3649d1dbbdff2",
+  "records": [
+    {
+      "bill_id": "bill-050f92f50816c63ccd8d670c",
+      "operation": "CREATE",
+      "document_info": {
+        "document_type": "Invoice",
+        "reference_no": "SYN-PDF-001",
+        "document_date": "2026-10-30",
+        "bill_of_lading": "DEMOBL1001",
+        "booking_no": "DEMOBK1001",
+        "container_no": "DEMU1234567",
+        "original_reference_no": null
+      },
+      "transaction_party": {
+        "issuer": "Demo Ocean Logistics Ltd",
+        "recipient": "Demo Trading Ltd",
+        "payer": "Demo Trading Ltd",
+        "payee": "Demo Ocean Logistics Ltd"
+      },
+      "charge_details": {
+        "original_charge_item": "Handling Fee",
+        "charge_item": "Handling Charge",
+        "amount": 65.0,
+        "currency": "USD",
+        "payment_term": "PP",
+        "quantity": 1,
+        "unit_price": 65.0,
+        "line_id": null
+      },
+      "financial_attributes": {
+        "accounting_entity": "Demo Trading Ltd",
+        "posting_type": "AP",
+        "entry_type": "NORMAL",
+        "original_bill_id": null
+      },
+      "audit_trail": {
+        "ai_reasoning": [
+          "从 invoice.pdf 的 page 1 row 7 提取费用",
+          "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+        ],
+        "sources": [
+          "src-0002-26a75db81005"
+        ],
+        "evidence": [
+          {
+            "path": "document_info.document_type",
+            "quote": "Invoice",
+            "start": 47,
+            "end": 54,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.reference_no",
+            "quote": "Reference No: SYN-PDF-001",
+            "start": 55,
+            "end": 80,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.document_date",
+            "quote": "Document Date: 2026-10-30",
+            "start": 81,
+            "end": 106,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.bill_of_lading",
+            "quote": "Bill of Lading: DEMOBL1001",
+            "start": 272,
+            "end": 298,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.booking_no",
+            "quote": "Booking No: DEMOBK1001",
+            "start": 299,
+            "end": 321,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.container_no",
+            "quote": "Container No: DEMU1234567",
+            "start": 322,
+            "end": 347,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.issuer",
+            "quote": "Issuer: Demo Ocean Logistics Ltd",
+            "start": 107,
+            "end": 139,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.recipient",
+            "quote": "Recipient: Demo Trading Ltd",
+            "start": 140,
+            "end": 167,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.payer",
+            "quote": "Payer: Demo Trading Ltd",
+            "start": 168,
+            "end": 191,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.payee",
+            "quote": "Payee: Demo Ocean Logistics Ltd",
+            "start": 192,
+            "end": 223,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee",
+            "start": 419,
+            "end": 431,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "65.00",
+            "start": 438,
+            "end": 443,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD",
+            "start": 454,
+            "end": 457,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP",
+            "start": 460,
+            "end": 462,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1",
+            "start": 6,
+            "end": 7,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "65.00",
+            "start": 438,
+            "end": 443,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "totals.USD",
+            "quote": "TOTAL USD 100.00",
+            "start": 502,
+            "end": 518,
+            "source_id": "src-0002-26a75db81005"
+          }
+        ],
+        "issues": [],
+        "confidence": 1.0,
+        "matched_bill_id": null,
+        "changed_fields": [],
+        "previous_values": {},
+        "proposed_operation": "CREATE",
+        "accounting_adjustment": {},
+        "monetary_summary": {
+          "totals": {
+            "USD": 100.0
+          },
+          "subtotals": {},
+          "tax": {},
+          "evidence_valid": true,
+          "checks_passed": true
+        }
+      }
+    },
+    {
+      "bill_id": "bill-b21dac28ea3b456af28de79d",
+      "operation": "CREATE",
+      "document_info": {
+        "document_type": "Invoice",
+        "reference_no": "SYN-PDF-001",
+        "document_date": "2026-10-30",
+        "bill_of_lading": "DEMOBL1001",
+        "booking_no": "DEMOBK1001",
+        "container_no": "DEMU1234567",
+        "original_reference_no": null
+      },
+      "transaction_party": {
+        "issuer": "Demo Ocean Logistics Ltd",
+        "recipient": "Demo Trading Ltd",
+        "payer": "Demo Trading Ltd",
+        "payee": "Demo Ocean Logistics Ltd"
+      },
+      "charge_details": {
+        "original_charge_item": "Doc Fee",
+        "charge_item": "Documentation Fee",
+        "amount": 35.0,
+        "currency": "USD",
+        "payment_term": "PP",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "line_id": null
+      },
+      "financial_attributes": {
+        "accounting_entity": "Demo Trading Ltd",
+        "posting_type": "AP",
+        "entry_type": "NORMAL",
+        "original_bill_id": null
+      },
+      "audit_trail": {
+        "ai_reasoning": [
+          "从 invoice.pdf 的 page 1 row 8 提取费用",
+          "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"
+        ],
+        "sources": [
+          "src-0002-26a75db81005"
+        ],
+        "evidence": [
+          {
+            "path": "document_info.document_type",
+            "quote": "Invoice",
+            "start": 47,
+            "end": 54,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.reference_no",
+            "quote": "Reference No: SYN-PDF-001",
+            "start": 55,
+            "end": 80,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.document_date",
+            "quote": "Document Date: 2026-10-30",
+            "start": 81,
+            "end": 106,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.bill_of_lading",
+            "quote": "Bill of Lading: DEMOBL1001",
+            "start": 272,
+            "end": 298,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.booking_no",
+            "quote": "Booking No: DEMOBK1001",
+            "start": 299,
+            "end": 321,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "document_info.container_no",
+            "quote": "Container No: DEMU1234567",
+            "start": 322,
+            "end": 347,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.issuer",
+            "quote": "Issuer: Demo Ocean Logistics Ltd",
+            "start": 107,
+            "end": 139,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.recipient",
+            "quote": "Recipient: Demo Trading Ltd",
+            "start": 140,
+            "end": 167,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.payer",
+            "quote": "Payer: Demo Trading Ltd",
+            "start": 168,
+            "end": 191,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "transaction_party.payee",
+            "quote": "Payee: Demo Ocean Logistics Ltd",
+            "start": 192,
+            "end": 223,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Doc Fee",
+            "start": 463,
+            "end": 470,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "35.00",
+            "start": 477,
+            "end": 482,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD",
+            "start": 454,
+            "end": 457,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP",
+            "start": 460,
+            "end": 462,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1",
+            "start": 6,
+            "end": 7,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "35.00",
+            "start": 477,
+            "end": 482,
+            "source_id": "src-0002-26a75db81005"
+          },
+          {
+            "path": "totals.USD",
+            "quote": "TOTAL USD 100.00",
+            "start": 502,
+            "end": 518,
+            "source_id": "src-0002-26a75db81005"
+          }
+        ],
+        "issues": [],
+        "confidence": 1.0,
+        "matched_bill_id": null,
+        "changed_fields": [],
+        "previous_values": {},
+        "proposed_operation": "CREATE",
+        "accounting_adjustment": {},
+        "monetary_summary": {
+          "totals": {
+            "USD": 100.0
+          },
+          "subtotals": {},
+          "tax": {},
+          "evidence_valid": true,
+          "checks_passed": true
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "src-0001-834a8f3c3945",
+      "filename": "notice.eml",
+      "sha256": "834a8f3c39458236395ba6d24ff31c81eb545f4faaaee0012b3cddbb607a7012",
+      "parent_id": null,
+      "media_type": ".eml",
+      "text": "Subject: Synthetic invoice attachment\nFrom: billing@example.invalid\nTo: finance@example.invalid\nDate: Fri, 30 Oct 2026 09:00:00 +0800\n\nPlease process the attached invoice. This message contains no fees of its own.\r\n",
+      "method": "email-stdlib",
+      "issues": [],
+      "ocr_charge_rows": null
+    },
+    {
+      "source_id": "src-0002-26a75db81005",
+      "filename": "invoice.pdf",
+      "sha256": "26a75db81005598c6472bf73e27102a0fc153b147e943d0ddcf662ca265d1ebc",
+      "parent_id": "src-0001-834a8f3c3945",
+      "media_type": ".pdf",
+      "text": "[PAGE 1]\nSYNTHETIC TEST DATA - NOT A REAL BILL\nInvoice\nReference No: SYN-PDF-001\nDocument Date: 2026-10-30\nIssuer: Demo Ocean Logistics Ltd\nRecipient: Demo Trading Ltd\nPayer: Demo Trading Ltd\nPayee: Demo Ocean Logistics Ltd\nDemo Trading Ltd pays Demo Ocean Logistics Ltd.\nBill of Lading: DEMOBL1001\nBooking No: DEMOBK1001\nContainer No: DEMU1234567\nDescription | Quantity | Unit price | Amount | Currency | Payment term\nHandling Fee | 1 | 65.00 | 65.00 | USD | PP\nDoc Fee | 1 | 35.00 | 35.00 | USD | PP\nTOTAL USD 100.00",
+      "method": "exam-ocr-api+local-evidence",
+      "issues": [],
+      "ocr_charge_rows": [
+        {
+          "chargeItem": "Handling Fee",
+          "amount": "65.00"
+        },
+        {
+          "chargeItem": "Doc Fee",
+          "amount": "35.00"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "stage": "extract",
+      "source_id": "src-0001-834a8f3c3945",
+      "line_count": 0,
+      "reason": "The document contains no fee information - only a message requesting processing of an attached invoice which is not provided"
+    },
+    {
+      "source_id": "src-0001-834a8f3c3945",
+      "stage": "extract",
+      "attempt": 1,
+      "ok": true,
+      "seconds": 13.796,
+      "grounding_issues": [],
+      "prompt_version": "shipping-extraction-v4",
+      "prompt_sha256": "417df28dcc1cbecec3139fe8ab93b18df27281f4aeb513b11695e46f78e71782"
+    },
+    {
+      "source_id": "src-0002-26a75db81005",
+      "stage": "extract",
+      "attempt": 1,
+      "ok": true,
+      "seconds": 38.672,
+      "grounding_issues": [],
+      "prompt_version": "shipping-extraction-v4",
+      "prompt_sha256": "417df28dcc1cbecec3139fe8ab93b18df27281f4aeb513b11695e46f78e71782"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "prompt_version": "shipping-extraction-v4",
+    "model": "glm-4.5-flash",
+    "ocr_mode": "remote",
+    "accounting_entity": "Demo Trading Ltd",
+    "credit_note_policy": "linked_signed_adjustment",
+    "extraction_mode": "live",
+    "seconds": 94.859,
+    "record_count": 2,
+    "pending_count": 0,
+    "posting_performed": false,
+    "synthetic_data": true,
+    "input_sha256": {
+      "notice.eml": "834a8f3c39458236395ba6d24ff31c81eb545f4faaaee0012b3cddbb607a7012"
+    }
+  }
+}

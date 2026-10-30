@@ -18,6 +18,12 @@ class Settings(BaseSettings):
     ocr_endpoint: str = "https://gateway.pltplt.com/ai/process"
     ocr_api_key: SecretStr = SecretStr("")
     ocr_attempts: int = Field(2, ge=1, le=3)
+    ocr_file_base_url: str = ""
+    ocr_file_secret: SecretStr = SecretStr("")
+    ocr_file_ttl_seconds: int = Field(900, ge=60, le=3600)
+    libreoffice_path: str = ""
+    cloudflared_path: str = ""
+    credit_note_policy: Literal["review", "linked_signed_adjustment"] = "review"
     accounting_entity: str | None = None
     accounting_aliases: list[str] = []
     data_dir: Path = Path("data/private")

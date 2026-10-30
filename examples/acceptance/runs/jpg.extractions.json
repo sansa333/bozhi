@@ -1,0 +1,158 @@
+{
+  "0e02ed443319ddb1dcc8c8eb582cb82203469429291563a87120b992fdd566b5": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-PDF-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEM0BL1001",
+      "booking_no": "DEM0BK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-PDF-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEM0BL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEM0BK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 100.00"
+      }
+    ],
+    "totals": {
+      "USD": 100.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "Handling Fee |1| 65.00 | 65.00 | USD | PP",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 65.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 65.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "65.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "65.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      },
+      {
+        "source_line": "Doc Fee|1|35.00|35.00 | USD |PP",
+        "charge_details": {
+          "original_charge_item": "Doc Fee",
+          "charge_item": null,
+          "amount": 35.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 35.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Doc Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "35.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "35.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  }
+}

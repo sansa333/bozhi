@@ -1,0 +1,861 @@
+{
+  "synthetic_data": true,
+  "entity": "Demo Trading Ltd",
+  "credit_note_policy": "linked_signed_adjustment",
+  "cases": [
+    {
+      "name": "pdf",
+      "files": [
+        "pdf/invoice.pdf"
+      ],
+      "existing": "pdf/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "png",
+      "files": [
+        "png/invoice.png"
+      ],
+      "existing": "png/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [],
+      "review_nullable_fields": [
+        "document_info.bill_of_lading",
+        "document_info.booking_no"
+      ]
+    },
+    {
+      "name": "jpg",
+      "files": [
+        "jpg/invoice.jpg"
+      ],
+      "existing": "jpg/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [],
+      "review_nullable_fields": [
+        "document_info.bill_of_lading",
+        "document_info.booking_no"
+      ]
+    },
+    {
+      "name": "tiff",
+      "files": [
+        "tiff/invoice.tiff"
+      ],
+      "existing": "tiff/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [],
+      "review_nullable_fields": [
+        "document_info.bill_of_lading",
+        "document_info.booking_no"
+      ]
+    },
+    {
+      "name": "scanned-pdf",
+      "files": [
+        "scanned-pdf/invoice.pdf"
+      ],
+      "existing": "scanned-pdf/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [],
+      "review_nullable_fields": [
+        "document_info.bill_of_lading",
+        "document_info.booking_no"
+      ]
+    },
+    {
+      "name": "eml-attachment",
+      "files": [
+        "eml-attachment/notice.eml"
+      ],
+      "existing": "eml-attachment/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-PDF-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Doc Fee",
+          "charge_details.charge_item": "Documentation Fee",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "eml-ar",
+      "files": [
+        "eml-ar/invoice.eml"
+      ],
+      "existing": "eml-ar/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-AR-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Trading Ltd",
+          "transaction_party.recipient": "Demo Customer Ltd",
+          "transaction_party.payer": "Demo Customer Ltd",
+          "transaction_party.payee": "Demo Trading Ltd",
+          "charge_details.original_charge_item": "Trucking Fee",
+          "charge_details.charge_item": "Trucking Charge",
+          "charge_details.amount": "100.00",
+          "charge_details.currency": "EUR",
+          "charge_details.payment_term": "CC",
+          "charge_details.quantity": "2",
+          "charge_details.unit_price": "50.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AR",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "EUR": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "xlsx-update",
+      "files": [
+        "xlsx-update/amendment.xlsx"
+      ],
+      "existing": "xlsx-update/existing.json",
+      "expected": [
+        {
+          "operation": "UPDATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-UPDATE-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "40.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": null,
+          "charge_details.unit_price": null,
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "40.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "xls-same-name",
+      "files": [
+        "xls-same-name/invoice.xls"
+      ],
+      "existing": "xls-same-name/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-XLS-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "65.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "65.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-XLS-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "35.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "35.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "100.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "docx-tax",
+      "files": [
+        "docx-tax/invoice.docx"
+      ],
+      "existing": "docx-tax/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-TAX-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Customs Fee",
+          "charge_details.charge_item": "Customs Clearance Fee",
+          "charge_details.amount": "100.00",
+          "charge_details.currency": "CNY",
+          "charge_details.payment_term": "COD",
+          "charge_details.quantity": "2",
+          "charge_details.unit_price": "50.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "CNY": "105.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {
+            "CNY": "100.00"
+          },
+          "audit_trail.monetary_summary.tax": {
+            "CNY": "5.00"
+          }
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "doc-credit",
+      "files": [
+        "doc-credit/credit.doc"
+      ],
+      "existing": "doc-credit/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Credit Note",
+          "document_info.reference_no": "SYN-CREDIT-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": "SYN-ORIGINAL-001",
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Ocean Logistics Ltd",
+          "transaction_party.payee": "Demo Trading Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "-15.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": null,
+          "charge_details.unit_price": null,
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "REVERSAL",
+          "financial_attributes.original_bill_id": "synthetic-original-credit-001",
+          "audit_trail.monetary_summary.totals": {
+            "USD": "15.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "currency-review",
+      "files": [
+        "currency-review/invoice.eml"
+      ],
+      "existing": "currency-review/existing.json",
+      "expected": [
+        {
+          "operation": "PENDING_REVIEW",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-CURRENCY-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Handling Fee",
+          "charge_details.charge_item": "Handling Charge",
+          "charge_details.amount": "50.00",
+          "charge_details.currency": null,
+          "charge_details.payment_term": "PP",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "50.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {},
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [
+        "INVALID_OR_MISSING_CURRENCY"
+      ]
+    },
+    {
+      "name": "duplicate",
+      "files": [
+        "duplicate/first.eml",
+        "duplicate/second.eml"
+      ],
+      "existing": "duplicate/existing.json",
+      "expected": [
+        {
+          "operation": "CREATE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-DUP-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Storage Fee",
+          "charge_details.charge_item": "Storage Charge",
+          "charge_details.amount": "24.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "CC",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "24.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "24.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "NO_CHANGE",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-DUP-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Storage Fee",
+          "charge_details.charge_item": "Storage Charge",
+          "charge_details.amount": "24.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "CC",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "24.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "24.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": []
+    },
+    {
+      "name": "conflict",
+      "files": [
+        "conflict/first.eml",
+        "conflict/second.eml"
+      ],
+      "existing": "conflict/existing.json",
+      "expected": [
+        {
+          "operation": "PENDING_REVIEW",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-DUP-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Storage Fee",
+          "charge_details.charge_item": "Storage Charge",
+          "charge_details.amount": "24.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "CC",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "24.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "24.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        },
+        {
+          "operation": "PENDING_REVIEW",
+          "document_info.document_type": "Invoice",
+          "document_info.reference_no": "SYN-DUP-001",
+          "document_info.document_date": "2026-10-30",
+          "document_info.bill_of_lading": "DEMOBL1001",
+          "document_info.booking_no": "DEMOBK1001",
+          "document_info.container_no": "DEMU1234567",
+          "document_info.original_reference_no": null,
+          "transaction_party.issuer": "Demo Ocean Logistics Ltd",
+          "transaction_party.recipient": "Demo Trading Ltd",
+          "transaction_party.payer": "Demo Trading Ltd",
+          "transaction_party.payee": "Demo Ocean Logistics Ltd",
+          "charge_details.original_charge_item": "Storage Fee",
+          "charge_details.charge_item": "Storage Charge",
+          "charge_details.amount": "25.00",
+          "charge_details.currency": "USD",
+          "charge_details.payment_term": "CC",
+          "charge_details.quantity": "1",
+          "charge_details.unit_price": "25.00",
+          "financial_attributes.accounting_entity": "Demo Trading Ltd",
+          "financial_attributes.posting_type": "AP",
+          "financial_attributes.entry_type": "NORMAL",
+          "financial_attributes.original_bill_id": null,
+          "audit_trail.monetary_summary.totals": {
+            "USD": "25.00"
+          },
+          "audit_trail.monetary_summary.subtotals": {},
+          "audit_trail.monetary_summary.tax": {}
+        }
+      ],
+      "required_issues": [
+        "CROSS_SOURCE_CONFLICT_OR_AMBIGUOUS_ROW"
+      ]
+    }
+  ]
+}

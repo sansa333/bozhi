@@ -1,8 +1,16 @@
+from decimal import Decimal
+
 import pytest
+from langchain_core.exceptions import OutputParserException
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import ValidationError
 
-from shipping_agent.extractor import SYSTEM_PROMPT, supplement_explicit_totals
+from shipping_agent.extractor import (
+    SYSTEM_PROMPT,
+    DecimalJSONOutputParser,
+    supplement_explicit_amount_columns,
+    supplement_explicit_totals,
+)
 from shipping_agent.models import Evidence, Extraction
 
 
@@ -68,3 +76,45 @@ def test_nested_evidence_with_unknown_field_is_not_silently_accepted():
     with pytest.raises(ValidationError):
         Extraction.model_validate({"document_info": {"evidence": [
             {"path": "not_a_field", "quote": "made up"}]}})
+
+
+def test_printed_amount_is_not_lost_when_currency_is_ambiguous(sample):
+    source, ex = sample
+    source.text = "Description | Unit price | Amount\nHandling Fee | 40.00 | $50.00"
+    ex.lines[0].charge_details.amount = None
+    ex.lines[0].evidence = [Evidence(path="charge_details.amount", quote="$50.00")]
+    fixed, paths = supplement_explicit_amount_columns(ex, source)
+    assert fixed.lines[0].charge_details.amount == 50
+    assert paths == ["lines[0].charge_details.amount"]
+    assert ex.lines[0].charge_details.amount is None
+
+
+@pytest.mark.parametrize("text,quote", [
+    ("Description | Unit price\nHandling Fee | $50.00", "$50.00"),
+    ("Description | Amount\nHandling Fee | $I00.00", "$I00.00"),
+    ("Description | Amount\nHandling Fee | $50.00\nHandling Fee | $50.00", "$50.00"),
+    ("Description | Amount\nHandling Fee | $50.00", "$99.00"),
+])
+def test_amount_supplement_rejects_rates_ambiguous_rows_and_ocr_errors(sample, text, quote):
+    source, ex = sample
+    source.text = text
+    ex.lines[0].charge_details.amount = None
+    ex.lines[0].evidence = [Evidence(path="charge_details.amount", quote=quote)]
+    fixed, paths = supplement_explicit_amount_columns(ex, source)
+    assert paths == []
+    assert fixed.lines[0].charge_details.amount is None
+
+
+def test_model_json_parser_preserves_decimal_precision_before_pydantic():
+    result = DecimalJSONOutputParser().invoke('{"amount": 9007199254740993.123456789}')
+    assert result["amount"] == Decimal("9007199254740993.123456789")
+
+
+@pytest.mark.parametrize("value", ['{"amount": 40', '{"amount": NaN}', '{"amount": Infinity}'])
+def test_truncated_or_nonfinite_model_json_is_not_silently_repaired(value):
+    with pytest.raises(OutputParserException):
+        DecimalJSONOutputParser().invoke(value)
+
+
+def test_json_fence_is_accepted_without_changing_values():
+    assert DecimalJSONOutputParser().invoke('```json\n{"amount": 40.01}\n```')["amount"] == Decimal("40.01")

@@ -1,5 +1,5 @@
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
@@ -56,7 +56,11 @@ def value_in_quote(path: str, value: Any, quote: str) -> bool:
         if str(value) in quote:
             return True
         for raw in re.findall(r"\d{1,4}[-/]\d{1,2}[-/]\d{1,4}", quote):
-            for fmt in ("%m/%d/%Y", "%m-%d-%Y", "%Y-%m-%d", "%Y/%m/%d"):
+            parts = re.split(r"[-/]", raw)
+            if (len(parts[2]) == 4 and 1 <= int(parts[0]) <= 12 and 1 <= int(parts[1]) <= 12
+                    and int(parts[0]) != int(parts[1])):
+                continue
+            for fmt in ("%m/%d/%Y", "%m-%d-%Y", "%d/%m/%Y", "%d-%m-%Y", "%Y-%m-%d", "%Y/%m/%d"):
                 try:
                     if datetime.strptime(raw, fmt).date().isoformat() == value:
                         return True
@@ -80,16 +84,22 @@ def ground_fields(data: dict, evidence: list, text: str) -> tuple[list[str], lis
     for e in evidence:
         if e.quote in text:
             by_path[e.path].append(e.quote)
-    for group in ("document_info", "transaction_party", "charge_details", "totals", "tax"):
+    for group in ("document_info", "transaction_party", "charge_details", "totals", "subtotals", "tax"):
         for key, value in data.get(group, {}).items():
             if value is None or (group == "charge_details" and key == "charge_item"):
                 continue
             path = f"{group}.{key}"
             quotes = [q for q in by_path[path] if value_in_quote(path, value, q)]
+            if group in {"totals", "subtotals", "tax"}:
+                quotes = [q for q in quotes if value_in_quote("charge_details.currency", key, q)]
+                labels = {"totals": r"(?<!\w)(?:GRAND\s*)?TOTAL(?:\b|(?=[A-Z]{3}\d))|合计|总计",
+                          "subtotals": r"\bSUBTOTAL\b|小计|税前|不含税",
+                          "tax": r"\b(?:TAX|VAT|GST)\b|税"}
+                quotes = [q for q in quotes if re.search(labels[group], q, re.I)]
             if not quotes:
                 issues.append(f"UNGROUNDED_FIELD:{path}")
                 # Unknown evidence-backed values must be null in output, not fabricated proposals.
-                if group not in {"totals", "tax"}:
+                if group not in {"totals", "subtotals", "tax"}:
                     data[group][key] = None
             else:
                 q = min(quotes, key=len)
@@ -132,14 +142,35 @@ def validate_extraction(ex: Extraction) -> list[str]:
     for currency, total in ex.totals.items():
         if abs(sums.get(currency.upper(), Decimal(0)) + ex.tax.get(currency, Decimal(0))-total) > Decimal("0.01"):
             issues.append(f"TOTAL_MISMATCH:{currency}")
+    for currency, subtotal in ex.subtotals.items():
+        if abs(sums.get(currency.upper(), Decimal(0))-subtotal) > Decimal("0.01"):
+            issues.append(f"SUBTOTAL_MISMATCH:{currency}")
     return issues
+
+
+def ocr_alignment_issues(source: Source, ex: Extraction) -> list[str]:
+    issues = []
+    # Detect letter/digit ambiguity independently of the model; never silently repair money.
+    numeric = r"[0-9IOol][0-9IOol,]*(?:\.[0-9IOol]+)?"
+    pattern = rf"(?:\b(?:USD|EUR|CNY|RMB|HKD|JPY)\s+|(?:amount|金额|单价)\s*[:=|]\s*)({numeric})(?!\w)"
+    for token in re.findall(pattern, source.text, re.IGNORECASE):
+        if re.search(r"[IOol]", token) and (re.search(r"\d", token) or "." in token):
+            issues.append("OCR_NUMERIC_AMBIGUITY")
+    if source.ocr_charge_rows is not None:
+        observed = Counter((norm(normalize_charge(Charge(original_charge_item=r["chargeItem"])).charge_item),
+                            Decimal(r["amount"])) for r in source.ocr_charge_rows)
+        extracted = Counter((norm(normalize_charge(line.charge_details).charge_item), line.charge_details.amount)
+                            for line in ex.lines)
+        if observed != extracted:
+            issues.append("OCR_MODEL_CHARGE_MISMATCH")
+    return list(dict.fromkeys(issues))
 
 
 def proposals(source: Source, ex: Extraction, entity: str | None, aliases: list[str]) -> list[Bill]:
     output = []
-    shared_issues = [*source.issues, *validate_extraction(ex)]
-    total_data = {"totals": dict(ex.totals), "tax": dict(ex.tax)}
-    total_issues, _ = ground_fields(total_data, ex.evidence, source.text)
+    shared_issues = [*source.issues, *validate_extraction(ex), *ocr_alignment_issues(source, ex)]
+    total_data = {"totals": dict(ex.totals), "subtotals": dict(ex.subtotals), "tax": dict(ex.tax)}
+    total_issues, total_evidence = ground_fields(total_data, ex.evidence, source.text)
     shared_issues += total_issues
     for line in ex.lines:
         raw = {"document_info": ex.document_info.model_dump(),
@@ -150,6 +181,23 @@ def proposals(source: Source, ex: Extraction, entity: str | None, aliases: list[
         raw["charge_details"]["charge_item"] = None
         bill = Bill(document_info=raw["document_info"], transaction_party=raw["transaction_party"],
                     charge_details=normalize_charge(Charge.model_validate(raw["charge_details"])))
+        raster = source.raster_ocr_used or source.media_type in {".image", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
+        if raster:
+            labels = {"reference_no": r"(?:reference|invoice)(?:\s+no)?",
+                      "bill_of_lading": r"(?:bill\s+of\s+lading|b/l)(?:\s+no)?",
+                      "booking_no": r"booking(?:\s+no)?", "container_no": r"container(?:\s+no)?",
+                      "original_reference_no": r"original\s+invoice\s+reference"}
+            for key in ("reference_no", "bill_of_lading", "booking_no", "container_no", "original_reference_no"):
+                value = getattr(bill.document_info, key)
+                candidates = re.findall(labels[key] + r"\s*[:#]\s*([A-Z0-9-]+)", source.text, re.I)
+                suspect = next((v for v in ([value] if value else []) + candidates
+                                if re.search(r"[A-Za-z][01][A-Za-z]|^[01][A-Za-z]{2}", v)), None)
+                # Conservative warning, not a universal identifier grammar or an O/0 repair rule.
+                if suspect:
+                    path = "document_info." + key
+                    bill.audit_trail.unresolved_candidates[path] = suspect
+                    setattr(bill.document_info, key, None)
+                    issues.append("OCR_IDENTIFIER_AMBIGUITY:" + path)
         bill.financial_attributes.accounting_entity = entity
         bill.financial_attributes.posting_type = posting_type(raw["transaction_party"], entity, aliases)
         c = bill.charge_details
@@ -160,6 +208,9 @@ def proposals(source: Source, ex: Extraction, entity: str | None, aliases: list[
             issues.append("MISSING_AMOUNT")
         if not c.currency or not pycountry.currencies.get(alpha_3=c.currency):
             issues.append("INVALID_OR_MISSING_CURRENCY")
+            if c.currency:
+                bill.audit_trail.unresolved_candidates["charge_details.currency"] = c.currency
+                c.currency = None
         if c.payment_term and c.payment_term not in set(PAYMENT.values()):
             issues.append("UNKNOWN_PAYMENT_TERM")
         if line.confidence < 0.85:
@@ -175,7 +226,9 @@ def proposals(source: Source, ex: Extraction, entity: str | None, aliases: list[
             issues.append("CREDIT_NOTE_ACCOUNTING_POLICY_REQUIRED")
         bill.audit_trail.sources = [source.source_id]
         bill.audit_trail.confidence = line.confidence
-        bill.audit_trail.evidence = [{**e, "source_id": source.source_id} for e in evidence]
+        bill.audit_trail.evidence = [{**e, "source_id": source.source_id} for e in evidence + total_evidence]
+        bill.audit_trail.monetary_summary = {**total_data, "evidence_valid": not total_issues,
+                                           "checks_passed": not validate_extraction(ex)}
         bill.audit_trail.ai_reasoning = [f"从 {source.filename} 的 {line.source_line} 提取费用",
                                          "仅保留有原文证据的字段；应收应付按记账主体与付款方向计算"]
         bill.audit_trail.issues = list(dict.fromkeys(issues))
@@ -247,6 +300,7 @@ CHANGE_TERMS = {
     "bill_of_lading": r"bill\s*of\s*lading|b/l|提单",
     "booking_no": r"booking|订舱",
     "container_no": r"container|箱号",
+    "original_reference_no": r"original\s*(?:invoice|reference)|原单|原始账单",
     "issuer": r"issuer|签发方", "recipient": r"recipient|接收方",
     "payer": r"payer|付款方", "payee": r"payee|收款方",
 }
@@ -330,3 +384,72 @@ def finalize(bill: Bill) -> Bill:
     if bill.audit_trail.issues:
         bill.operation = "PENDING_REVIEW"
     return bill
+
+
+def credit_adjustment(new: Bill, existing: list[Bill], policy: str) -> Bill | None:
+    c = new.charge_details
+    is_credit = "credit" in norm(new.document_info.document_type) or (c.amount is not None and c.amount < 0)
+    if not is_credit:
+        return None
+    if policy != "linked_signed_adjustment":
+        return finalize(new)
+    reference = new.document_info.original_reference_no
+    candidates = [b for b in existing if reference and b.bill_id
+                  and same(b.document_info.reference_no, reference)
+                  and same(b.charge_details.charge_item, c.charge_item)
+                  and c.currency and same(b.charge_details.currency, c.currency)
+                  and new.financial_attributes.accounting_entity
+                  and same(b.financial_attributes.accounting_entity,
+                           new.financial_attributes.accounting_entity)
+                  and b.financial_attributes.entry_type == "NORMAL"]
+    if len(candidates) != 1:
+        new.audit_trail.issues.append("CREDIT_ORIGINAL_BILL_NOT_UNIQUE")
+        return finalize(new)
+    original = candidates[0]
+    parties_agree = all(x and y and same(x, y) for x, y in (
+        (new.transaction_party.issuer, original.transaction_party.issuer),
+        (new.transaction_party.recipient, original.transaction_party.recipient)))
+    if not parties_agree or not original.financial_attributes.posting_type:
+        new.audit_trail.issues.append("CREDIT_ORIGINAL_PARTIES_UNRESOLVED")
+        return finalize(new)
+    if same(new.document_info.reference_no, original.document_info.reference_no):
+        new.audit_trail.issues.append("CREDIT_REQUIRES_DISTINCT_DOCUMENT_REFERENCE")
+        return finalize(new)
+    if c.amount is None or c.amount == 0:
+        new.audit_trail.issues.append("CREDIT_AMOUNT_REQUIRED")
+        return finalize(new)
+    source_amount = c.amount
+    c.amount = -abs(c.amount)
+    new.financial_attributes.posting_type = original.financial_attributes.posting_type
+    new.financial_attributes.entry_type = "REVERSAL"
+    new.financial_attributes.original_bill_id = original.bill_id
+    new.audit_trail.accounting_adjustment = {"policy": policy, "source_amount": source_amount,
+                                           "signed_amount": c.amount, "original_bill_id": original.bill_id}
+    new.audit_trail.ai_reasoning.append("按配置的关联原单冲减政策生成独立负金额建议，保留原单 AR/AP 分类")
+    new.audit_trail.issues = [i for i in new.audit_trail.issues
+                             if i not in {"CREDIT_NOTE_ACCOUNTING_POLICY_REQUIRED", "AR_AP_DIRECTION_UNRESOLVED"}]
+    # Re-importing an already accepted credit is a no-op, not another reversal.
+    duplicates = [b for b in existing if same(b.document_info.reference_no, new.document_info.reference_no)
+                  and same(b.charge_details.charge_item, c.charge_item)
+                  and same(b.charge_details.currency, c.currency)
+                  and same(b.financial_attributes.accounting_entity, new.financial_attributes.accounting_entity)]
+    if duplicates:
+        if len(duplicates) == 1 and duplicates[0].charge_details == c and (
+                duplicates[0].financial_attributes == new.financial_attributes):
+            new.bill_id = duplicates[0].bill_id
+            new.operation = "NO_CHANGE"
+        else:
+            new.audit_trail.issues.append("CREDIT_DUPLICATE_CONFLICT")
+        return finalize(new)
+    previous_credits = [b for b in existing if b.financial_attributes.entry_type == "REVERSAL"
+                        and b.financial_attributes.original_bill_id == original.bill_id]
+    if any(b.charge_details.amount is None or b.charge_details.amount >= 0
+           or b.financial_attributes.accounting_entity != original.financial_attributes.accounting_entity
+           or b.charge_details.currency != original.charge_details.currency for b in previous_credits):
+        new.audit_trail.issues.append("CREDIT_INVALID_PRIOR_ADJUSTMENT")
+        return finalize(new)
+    balance = (original.charge_details.amount or Decimal(0)) + sum(
+        (b.charge_details.amount for b in previous_credits), Decimal(0))
+    if abs(c.amount) > balance:
+        new.audit_trail.issues.append("CREDIT_EXCEEDS_ORIGINAL_BALANCE")
+    return finalize(new)

@@ -1,0 +1,158 @@
+{
+  "61818771c3c18cab8ea7dcd13cfbff5683fc88febf6647acccb62b7ae5fe9d1d": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-XLS-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-XLS-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEMOBL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEMOBK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 100.00"
+      }
+    ],
+    "totals": {
+      "USD": 100.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "row 15",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 65.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 65.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "65.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "65.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      },
+      {
+        "source_line": "row 16",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 35.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 35.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "35.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "35.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  }
+}

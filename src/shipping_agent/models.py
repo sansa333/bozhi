@@ -17,6 +17,8 @@ class Source(StrictModel):
     text: str = ""
     method: str = ""
     issues: list[str] = Field(default_factory=list)
+    ocr_charge_rows: list[dict[str, str]] | None = None
+    raster_ocr_used: bool = False
 
 
 class DocumentInfo(StrictModel):
@@ -26,6 +28,7 @@ class DocumentInfo(StrictModel):
     bill_of_lading: str | None = None
     booking_no: str | None = None
     container_no: str | None = None
+    original_reference_no: str | None = None
 
     @field_validator("document_date")
     @classmethod
@@ -90,6 +93,7 @@ class Extraction(StrictModel):
     # Evidence for every populated document/party field and total, in addition to row evidence.
     evidence: list[Evidence] = Field(default_factory=list)
     totals: dict[str, Decimal] = Field(default_factory=dict, description="Totals keyed by ISO currency")
+    subtotals: dict[str, Decimal] = Field(default_factory=dict, description="Pre-tax subtotals by ISO currency")
     tax: dict[str, Decimal] = Field(default_factory=dict)
     lines: list[ExtractedLine] = Field(default_factory=list)
     no_charge_reason: str | None = None
@@ -136,6 +140,8 @@ class Extraction(StrictModel):
 class Financial(StrictModel):
     accounting_entity: str | None = None
     posting_type: Literal["AR", "AP"] | None = None
+    entry_type: Literal["NORMAL", "REVERSAL"] = "NORMAL"
+    original_bill_id: str | None = None
 
 
 class Audit(StrictModel):
@@ -148,6 +154,9 @@ class Audit(StrictModel):
     changed_fields: list[str] = Field(default_factory=list)
     previous_values: dict[str, Any] = Field(default_factory=dict)
     proposed_operation: str | None = None
+    accounting_adjustment: dict[str, Any] = Field(default_factory=dict)
+    monetary_summary: dict[str, Any] = Field(default_factory=dict)
+    unresolved_candidates: dict[str, Any] = Field(default_factory=dict)
 
 
 class Bill(StrictModel):
@@ -166,3 +175,15 @@ class RunReport(StrictModel):
     sources: list[Source]
     events: list[dict[str, Any]]
     metadata: dict[str, Any]
+
+
+def bill_output_schema() -> dict:
+    """Schema for the actual simplejson/Decimal output, rather than Pydantic's string serializer."""
+    import pycountry
+    schema = Bill.model_json_schema()
+    charge = schema["$defs"]["Charge"]["properties"]
+    for name in ("amount", "quantity", "unit_price"):
+        charge[name] = {"anyOf": [{"type": "number"}, {"type": "null"}], "default": None}
+    charge["currency"] = {"anyOf": [{"type": "string", "enum": sorted(c.alpha_3 for c in pycountry.currencies)},
+                                     {"type": "null"}], "default": None}
+    return schema

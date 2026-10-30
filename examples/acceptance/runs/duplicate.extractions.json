@@ -1,0 +1,230 @@
+{
+  "cf579358fbb9995070d2a4dfa617d6cb1bbb412e96cc6fb74ccc84d4a65d6196": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-DUP-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-DUP-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEMOBL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEMOBK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 24.00\r"
+      }
+    ],
+    "totals": {
+      "USD": 24.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "row 2",
+        "charge_details": {
+          "original_charge_item": "Storage Fee",
+          "charge_item": null,
+          "amount": 24.0,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 24.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Storage Fee"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "24.00"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "24.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "CC"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  },
+  "b481b4ed293af10ce616ab701542568dcf0c86b8c9f8134354eb34e7a50d4051": {
+    "document_info": {
+      "document_type": "Invoice",
+      "reference_no": "SYN-DUP-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": null
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Trading Ltd",
+      "payee": "Demo Ocean Logistics Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Invoice"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-DUP-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEMOBL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEMOBK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 24.00\r"
+      }
+    ],
+    "totals": {
+      "USD": 24.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "row 2",
+        "charge_details": {
+          "original_charge_item": "Storage Fee",
+          "charge_item": null,
+          "amount": 24.0,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 24.0,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Storage Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "24.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "CC"
+          },
+          {
+            "path": "charge_details.quantity",
+            "quote": "1"
+          },
+          {
+            "path": "charge_details.unit_price",
+            "quote": "24.00"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  }
+}

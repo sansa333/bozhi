@@ -1,0 +1,112 @@
+{
+  "5ff0ea5afc3dcf14a13739e90088dddce2f9497c243db9c3e3f81ba9351122a6": {
+    "document_info": {
+      "document_type": "Credit Note",
+      "reference_no": "SYN-CREDIT-001",
+      "document_date": "2026-10-30",
+      "bill_of_lading": "DEMOBL1001",
+      "booking_no": "DEMOBK1001",
+      "container_no": "DEMU1234567",
+      "original_reference_no": "SYN-ORIGINAL-001"
+    },
+    "transaction_party": {
+      "issuer": "Demo Ocean Logistics Ltd",
+      "recipient": "Demo Trading Ltd",
+      "payer": "Demo Ocean Logistics Ltd",
+      "payee": "Demo Trading Ltd"
+    },
+    "evidence": [
+      {
+        "path": "document_info.document_type",
+        "quote": "Credit Note"
+      },
+      {
+        "path": "document_info.reference_no",
+        "quote": "Reference No: SYN-CREDIT-001"
+      },
+      {
+        "path": "document_info.document_date",
+        "quote": "Document Date: 2026-10-30"
+      },
+      {
+        "path": "document_info.bill_of_lading",
+        "quote": "Bill of Lading: DEMOBL1001"
+      },
+      {
+        "path": "document_info.booking_no",
+        "quote": "Booking No: DEMOBK1001"
+      },
+      {
+        "path": "document_info.container_no",
+        "quote": "Container No: DEMU1234567"
+      },
+      {
+        "path": "document_info.original_reference_no",
+        "quote": "Original invoice reference: SYN-ORIGINAL-001"
+      },
+      {
+        "path": "transaction_party.issuer",
+        "quote": "Issuer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.recipient",
+        "quote": "Recipient: Demo Trading Ltd"
+      },
+      {
+        "path": "transaction_party.payer",
+        "quote": "Payer: Demo Ocean Logistics Ltd"
+      },
+      {
+        "path": "transaction_party.payee",
+        "quote": "Payee: Demo Trading Ltd"
+      },
+      {
+        "path": "totals.USD",
+        "quote": "TOTAL USD 15.00"
+      }
+    ],
+    "totals": {
+      "USD": 15.0
+    },
+    "subtotals": {},
+    "tax": {},
+    "lines": [
+      {
+        "source_line": "row 2",
+        "charge_details": {
+          "original_charge_item": "Handling Fee",
+          "charge_item": null,
+          "amount": 15.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": null,
+          "unit_price": null,
+          "line_id": null
+        },
+        "evidence": [
+          {
+            "path": "charge_details.original_charge_item",
+            "quote": "Handling Fee"
+          },
+          {
+            "path": "charge_details.amount",
+            "quote": "15.00"
+          },
+          {
+            "path": "charge_details.currency",
+            "quote": "USD"
+          },
+          {
+            "path": "charge_details.payment_term",
+            "quote": "PP"
+          }
+        ],
+        "explicit_changes": [],
+        "change_quote": null,
+        "confidence": 1.0
+      }
+    ],
+    "no_charge_reason": null,
+    "warnings": []
+  }
+}
