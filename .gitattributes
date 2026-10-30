@@ -1,6 +1,6 @@
 * text=auto eol=lf
 *.ps1 text eol=crlf
-*.eml -text whitespace=cr-at-eol
+*.eml -text whitespace=cr-at-eol,-blank-at-eof
 *.png binary
 *.jpg binary
 *.jpeg binary

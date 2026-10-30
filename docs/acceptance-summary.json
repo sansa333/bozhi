@@ -244,5 +244,10 @@
     "NO_CHANGE": 1
   },
   "private_materials_uploaded": false,
-  "strict_decimal_json_parser_live_verified": true
+  "strict_decimal_json_parser_live_verified": true,
+  "docker_runtime_verified": true,
+  "linux_libreoffice_verified": true,
+  "github_ci_url": "https://github.com/sansa333/bozhi/actions/runs/41022494427",
+  "github_ci_conclusion": "success",
+  "code_verified_commit": "b0d4845"
 }

@@ -49,7 +49,7 @@
 
 ## 未声称通过的环境验证
 
-本机没有运行 Docker 引擎，容器验收使用 GitHub Actions 的构建、健康检查和 DOC 转换步骤。Windows DOC 已用 Word 实测。Excel、Word 使用合成文件，用户材料中没有这两种格式。
+本机没有运行 Docker 引擎；[GitHub Actions](https://github.com/sansa333/bozhi/actions/runs/41022494427) 已通过 Linux 测试、Docker 构建、容器健康检查及 LibreOffice DOC 转换。Windows DOC 已用 Word 实测。Excel、Word 使用合成文件，用户材料中没有这两种格式。
 
 ## 复现
 

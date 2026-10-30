@@ -17,7 +17,7 @@
   "exam_ocr_public_dummy_pdf_http_status": 200,
   "private_materials_exam_ocr_verified": false,
   "accounting_entity_confirmed": false,
-  "docker_runtime_verified": false,
+  "docker_runtime_verified": true,
   "real_doc_converter_verified": true,
   "final_code_replay_run_id": "6c04dca45ed140a1969065bbc457b7c3",
   "synthetic_acceptance_cases": 14,
@@ -27,5 +27,9 @@
   "synthetic_fields_safely_rejected": 22,
   "synthetic_materials_exam_ocr_verified": true,
   "real_doc_converter_backend": "Microsoft Word (Windows); LibreOffice checked in CI",
-  "strict_decimal_json_parser_live_verified": true
+  "strict_decimal_json_parser_live_verified": true,
+  "linux_libreoffice_verified": true,
+  "github_ci_url": "https://github.com/sansa333/bozhi/actions/runs/41022494427",
+  "github_ci_conclusion": "success",
+  "code_verified_commit": "b0d4845"
 }
